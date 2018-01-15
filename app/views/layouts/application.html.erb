@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MaMaTech</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'  %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+  	<header>
+  		<% if user_signed_in? %>
+  		    <div class="container">
+				<div class="row">
+					<div class="col-md-3">
+							<%= link_to root_path do %>
+							  <%= image_tag "DesignEvo-Transparent.png" ,class: "img-responsive" ,alt: "MaMatech" %>
+							<% end %>
+					</div>
+				</div>
+			</div>
+			<nav class="nav">
+				<ul class="nav-list">
+					<li>
+						<%= link_to '教室情報を登録', '#' %>
+					</li>
+					<li>
+						<%= link_to 'お申し込み一覧', '#' %>
+					</li>
+					<li>
+						<%= link_to '生徒一覧', '#' %>
+					</li>
+					<li>
+						<%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+					</li>
+				</ul>
+			</nav>
+
+  		<% else %>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3">
+							<%= link_to root_path do %>
+							  <%= image_tag "DesignEvo-Transparent.png" ,class: "img-responsive" ,alt: "MaMatech" %>
+							<% end %>
+					</div>
+					<div class="col-md-offset-6 col-md-3">
+                        <%= link_to applicants_path, class: 'btn btn-warning btn-md heder-button' do %>
+						  教室を希望の方は<br>こちらから
+						<% end %>
+					</div>
+				</div>
+			</div>
+			<nav>
+				<ul class="nav-list">
+					<li>
+						<%= link_to '教室について', school_details_path %>
+					</li>
+					<li>
+						<%= link_to '学習内容', study_path %>
+					</li>
+					<li>
+						<%= link_to '料金', price_path %>
+					</li>
+					<li>
+						<%= link_to '教室を探す', search_path %>
+					</li>
+				</ul>
+			</nav>
+		<% end %>
+	</header>
+
+    <%= yield %>
+
+    <footer>
+    	<% if user_signed_in? %>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-offset-5 col-md-4">
+						<h3>お問い合わせ</h3>
+							<%= image_tag "黒電話の無料アイコン.png" ,class: "denwa-icon", alt: "電話アイコン" %>  03-0000-0000
+							<%= image_tag "メールの無料アイコンその8.png" ,class: "email-icon", alt: "メールアイコン" %>  mama.info@mamatech.com
+					</div>
+					<div class="col-md-3">
+								<%= link_to root_path do %>
+								  <%= image_tag "DesignEvo-Transparent.png" ,class: "img-responsive footer-logo" ,alt: "MaMatech" %>
+								<% end %>
+					</div>
+				</div>
+			</div>
+
+    	<% else %>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3">
+                        <%= link_to new_user_session_path, class: 'btn btn-warning btn-md heder-button' do %>
+						  講師の方はこちらから<br>ログイン
+						<% end %>
+					</div>
+					<div class="col-md-offset-2 col-md-4 contact_address">
+						<h4>お問い合わせ</h4>
+						<p class="footer-text">
+							<%= image_tag "黒電話の無料アイコン.png" ,class: "denwa-icon", alt: "電話アイコン" %>  03-0000-0000
+						</p>
+						<p class="footer-text">
+							<%= image_tag "メールの無料アイコンその8.png" ,class: "email-icon", alt: "メールアイコン" %>  mama.info@mamatech.com
+						</p>
+					</div>
+					<div class="col-md-3">
+								<%= link_to root_path do %>
+								  <%= image_tag "DesignEvo-Transparent.png" ,class: "img-responsive footer-logo" ,alt: "MaMatech" %>
+								<% end %>
+					</div>
+				</div>
+			</div>
+		<% end %>
+	</footer>
+<%= javascript_include_tag 'https://ajaxzip3.github.io/ajaxzip3.js' %>
+  </body>
+</html>

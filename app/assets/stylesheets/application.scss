@@ -1,0 +1,875 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	/*color: #6c6b6b;*/
+}
+
+body {
+	font-family: 'GenJyuuGothicX-Light', 'ヒラギノ角ゴ Pro W3','メイリオ', 'Meiryo',sans-serif;
+}
+
+/*ヘッダーCss*/
+.heder-button {
+	margin-top: 20px;
+}
+
+nav{
+    width: 100%;    /*横幅の指定*/
+    border-top: 1px solid #FF66CC;   /*上部の線の色を指定*/
+    border-bottom: 1px solid #FF66CC;    /*下部の線の色を指定*/
+    margin-top: 22px; /**/
+    overflow: hidden;   /*おまじない*/
+}
+nav ul{
+    width: 78%; /*横幅の指定*/
+    margin-left: 11%;   /*左端から20%右側に動かす*/
+}
+nav li{
+    width: calc(25% - 2px); /*横幅の指定（線の分をマイナスする）*/
+    border-left: 1px solid #FF66CC;  /*線を描く*/
+    text-align: center; /*文字を中央に*/
+    float: left;    /*左から並べる*/
+    list-style: none;
+}
+nav li:last-child{
+    border-right: 1px solid #FF66CC; /*li要素の最後の物は右側に線を描く*/
+}
+nav a{
+    display: block; /*1つのli全体にリンクを有効にする*/
+    text-decoration: none;  /*ブラウザ標準のリンク装飾をオフに*/
+    color:#313131;  /*文字色の変更*/
+    font-size: 110%;    /*フォントサイズの指定*/
+    letter-spacing: 5px;    /*文字と文字の間隔をあける*/
+    font-weight: 400;   /*文字の太さを調整*/
+    line-height: 45px;  /*行間の指定（ナビボタンの高さ指定）*/
+}
+nav a:hover{
+    background-color: #FFCCCC;   /*背景色の指定*/
+    color: #fff;    /*文字色の変更*/
+    transition: 0.5s;   /*ホバー時の動きをなめらかにする*/
+}
+
+/*top内容部分*/
+
+.main-visual {
+	width: 100%;
+	height: 100%;
+	background-image: url(usupink.jpg);
+	background-size: cover;
+	background-position: center;
+}
+
+.box {
+	 padding: 10px 10px;
+     color: #FF4F02;
+     border-radius:4px;
+     /*border:1px solid #222;*/
+     box-shadow:1px 1px 1px 1px rgba(0, 0, 0, 0.4);
+     margin: 22px 48px;
+     width: 450px;
+     height:190px;
+     position: relative;
+}
+
+.banner-text{
+	 font-size: 200%;
+     font-weight: 1000;
+     letter-spacing: 5px;
+     position: absolute;
+     bottom: 0px;
+     text-shadow: 
+	    white 2px 0px, white -2px 0px,
+	    white 0px -2px, white -2px 0px,
+	    white 2px 2px, white -2px 2px,
+	    white 2px -2px, white -2px -2px,
+	    white 1px 2px, white -1px 2px,
+	    white 1px -2px, white -1px -2px,
+	    white 2px 1px, white -2px 1px,
+	    white 2px -1px, white -2px -1px;
+}
+
+.banner-image1 {
+	background: linear-gradient(-45deg,
+		rgba(255, 235, 0, 0.15),
+		rgba(243, 205, 210, 0.91)),
+  	url(kawaiikodomo.jpg);
+  	background-size: cover;
+}
+
+
+.banner-image2 {
+	background: linear-gradient(-45deg,
+		rgba(255, 235, 0, 0.15),
+		rgba(243, 205, 210, 0.91)),
+	url(sennseitokodomo.jpg);
+	background-size: cover;
+}
+
+.banner-image3 {
+	background: linear-gradient(-45deg,
+		rgba(255, 235, 0, 0.15),
+		rgba(243, 205, 210, 0.91)),
+	url(pc.jpg);
+	background-size: cover;
+}
+
+.banner-image4 {
+	background: linear-gradient(-45deg,
+		rgba(255, 235, 0, 0.15),
+		rgba(243, 205, 210, 0.91)),
+	url(te.jpg);
+	background-size: cover;
+}
+
+
+a.banner-image-hover{
+	display: block;
+	width: 450px;
+	height: 190px;
+}
+
+.banner-image1:hover {
+	background: linear-gradient(-45deg,
+	 rgba(255, 12, 0, 0.28),
+	 rgba(226, 241, 103, 0.72)),
+	url(kawaiikodomo.jpg);
+	background-size: cover;
+    color:　#ff02a559;
+    transition: 0.5s;
+}
+
+.banner-image2:hover {
+	background: linear-gradient(-45deg,
+	 rgba(255, 12, 0, 0.28),
+	 rgba(226, 241, 103, 0.72)),
+	url(sennseitokodomo.jpg);
+	background-size: cover;
+    color:　#ff02a559;
+    transition: 0.5s;
+}
+
+.banner-image3:hover {
+	background: linear-gradient(-45deg,
+	 rgba(255, 12, 0, 0.28),
+	 rgba(226, 241, 103, 0.72)),
+	url(pc.jpg);
+	background-size: cover;
+    color:　#ff02a559;
+    transition: 0.5s;
+}
+
+.banner-image4:hover {
+	background: linear-gradient(-45deg,
+	 rgba(255, 12, 0, 0.28),
+	 rgba(226, 241, 103, 0.72)),
+	url(te.jpg);
+	background-size: cover;
+    color:　#ff02a559;
+    transition: 0.5s;
+}
+
+.under-image {
+	padding: 0 0 25px 15px;
+}
+
+/*フッター*/
+
+footer {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(-45deg,
+		rgba(245, 244, 239, 0.17),
+		rgba(247, 245, 241, 0.91)),
+	url(ohana.jpg);
+  background-size: cover;
+}
+
+.footer-logo {
+	margin: 93px 93px 0 0;
+}
+
+.footer-text {
+	font-size: 19px;
+}
+
+.denwa-icon {
+	margin-bottom: 7px;
+}
+
+.contact_address {
+    padding-left: 92px;
+    margin: 56px 0 0px 194px;
+}
+
+/*school-detail内容*/
+
+.school-detail {
+	 padding: 10px 10px;
+     border-radius:4px;
+     /*border:1px solid #222;*/
+     box-shadow:1px 1px 1px 1px rgba(0, 0, 0, 0.4);
+     margin: 30px -29px;
+     width: 1000px;
+     height: 100%;
+     background-color: #fff;
+     border-left: 8px solid #c92ad2;
+
+}
+
+.school-detail-image {
+	width: 330px;
+	height: 176px;
+	margin-top: 8px;
+}
+
+.school-detail-text {
+	line-height: 2;
+	font-size: 17px;
+}
+
+/*study内容*/
+
+.study {
+     padding: 10px 10px;
+     border-radius:4px;
+     /*border:1px solid #222;*/
+     box-shadow:1px 1px 1px 1px rgba(0, 0, 0, 0.4);
+     margin: 30px -29px;
+     width: 1000px;
+     height: 100%;
+     background-color: #fff;
+     border-left: 8px solid #c92ad2;
+}
+
+.study-image {
+	width: 330px;
+	height: 194px;
+	margin-top: 56px;
+}
+
+/*price内容*/
+
+.price {
+	 padding: 10px 10px;
+     border-radius:4px;
+     /*border:1px solid #222;*/
+     box-shadow:1px 1px 1px 1px rgba(0, 0, 0, 0.4);
+     margin: 30px 67px;
+     width: 1000px;
+     height: 100%;
+     background-color: #fff;
+     /*border-left: 8px solid #c92ad2;*/
+}
+
+.c-tit1 {
+    background-color: #FF8856;
+    color: #fff;
+    font-size: 142.8%;
+    line-height: 140%;
+    padding: 6px;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.c-table1 {
+    margin-bottom: 15px;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.c-table1 th {
+    background: #FFDBC9;
+    border: 1px solid #fff;
+    color: #800000;
+}
+
+.c-table1 td {
+	border: 1px solid #FFDBC9;
+	background: #FFF;
+}
+
+.c-table1 th, .c-table1 td {
+    padding: 10px;
+    text-align: center;
+}
+
+/*search内容*/
+
+.search-panel {
+	margin-top: 15px;
+}
+
+.search-panel-text {
+	font-size: 20px;
+	text-align: center;
+	background-color: #88e287 !important;
+}
+
+.search-form-button {
+	margin: 19px 0 0 4px;
+}
+
+.search-text-post {
+	font-size: 15px;
+	color: #008800;
+}
+
+.search-text-area {
+    font-size: 18px;
+	color: #008800;
+}
+
+.search-box-area {
+	border: 3px double #ddd;
+    padding: 10px 10px;
+    border-radius: 2px;
+    margin: 10px 0px;
+    width: 250px;
+    height: 100%;
+    margin: 11px 14px 0 auto;
+    float: right;
+}
+
+.area-table1 {
+    border: 1px solid #CCCCCC;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.area-table1 th {
+    background: #FFDBC9;
+    color: #800000;
+}
+
+.area-table1 td {
+	background: #FFF;
+}
+
+.area-table1 th, .area-table1 td {
+    text-align: center;
+    padding: .6em 2em;
+    border-bottom: 1px solid #CCCCCC;
+}
+
+.area-table1 tr:last-child th,
+.area-table1 tr:last-child td {
+    border-bottom: none;
+}
+
+/*applicants_top内容*/
+
+.box2 {
+	 padding: 10px 10px;
+     color: #FF4F02;
+     border-radius:4px;
+     /*border:1px solid #222;*/
+     box-shadow:1px 1px 1px 1px rgba(0, 0, 0, 0.4);
+     margin: 22px 48px;
+     width: 145%;
+     height:190px;
+     position: relative;
+}
+
+.banner2-text{
+	 font-size: 200%;
+     font-weight: 1000;
+     letter-spacing: 5px;
+     position: absolute;
+     bottom: 0px;
+     text-shadow: 
+	    white 2px 0px, white -2px 0px,
+	    white 0px -2px, white -2px 0px,
+	    white 2px 2px, white -2px 2px,
+	    white 2px -2px, white -2px -2px,
+	    white 1px 2px, white -1px 2px,
+	    white 1px -2px, white -1px -2px,
+	    white 2px 1px, white -2px 1px,
+	    white 2px -1px, white -2px -1px;
+}
+
+.banner2-image1 {
+	background: linear-gradient(-45deg,
+		rgba(255, 235, 0, 0.15),
+		rgba(243, 205, 210, 0.91)),
+  	url(sennseiegao.jpg);
+  	background-size: cover;
+}
+
+
+.banner2-image2 {
+	background: linear-gradient(-45deg,
+		rgba(255, 235, 0, 0.15),
+		rgba(243, 205, 210, 0.91)),
+	url(yasiite.jpg);
+	background-size: cover;
+}
+
+.banner2-image3 {
+	background: linear-gradient(-45deg,
+		rgba(255, 235, 0, 0.15),
+		rgba(243, 205, 210, 0.91)),
+	url(bennkyoucyuu.jpg);
+	background-size: cover;
+}
+
+a.banner2-image-hover{
+	display: block;
+	width: 450px;
+	height: 190px;
+}
+
+.banner2-image1:hover {
+	background: linear-gradient(-45deg,
+	 rgba(255, 12, 0, 0.28),
+	 rgba(226, 241, 103, 0.72)),
+	url(sennseiegao.jpg);
+	background-size: cover;
+    color:　#ff02a559;
+    transition: 0.5s;
+}
+
+.banner2-image2:hover {
+	background: linear-gradient(-45deg,
+	 rgba(255, 12, 0, 0.28),
+	 rgba(226, 241, 103, 0.72)),
+	url(yasiite.jpg);
+	background-size: cover;
+    color:　#ff02a559;
+    transition: 0.5s;
+}
+
+.banner2-image3:hover {
+	background: linear-gradient(-45deg,
+	 rgba(255, 12, 0, 0.28),
+	 rgba(226, 241, 103, 0.72)),
+	url(bennkyoucyuu.jpg);
+	background-size: cover;
+    color:　#ff02a559;
+    transition: 0.5s;
+}
+
+/*school_index内容*/
+
+.school-area-table {
+    margin-bottom: 15px;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.school-area-table th {
+    background: #FFDBC9;
+    border: 1px solid #fff;
+    color: #800000;
+    padding: 10px;
+}
+
+.school-area-table td {
+	border: 1px solid #FFDBC9;
+	background: #FFF;
+}
+
+.school-area-table th, .school-area-table td {
+    text-align: center;
+}
+
+/*school_show内容*/
+
+.school-show-table {
+    margin-bottom: 15px;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.school-show-table th {
+    background: #FFDBC9;
+    border: 1px solid #fff;
+    color: #800000;
+    padding: 10px;
+}
+
+.school-show-table td {
+	border: 1px solid #FFDBC9;
+	background: #FFF;
+	width: 700px;
+	text-align: left;
+}
+
+.school-show-table th{
+    text-align: center;
+}
+
+.school-show-image {
+	margin: 10px;
+	padding:7px;
+    border:1px solid #ccc;
+    background:#fff;
+    box-shadow: 1px 1px 5px rgba(20,20,20,0.2);
+}
+
+.school-teacher-name {
+	font-size: 20px;
+	border-bottom: 1px dotted red;
+}
+
+.school-teacher-Introduction {
+	margin-top: 20px;
+}
+
+.school-teacher-career {
+	font-size: 15px;
+}
+
+.school-show-table th, .school-show-table td {
+	padding: 13px;
+}
+
+.ggmap {
+	position: relative;
+	padding-bottom: 56.25%;
+	padding-top: 30px;
+	height: 0;
+	overflow: hidden;
+}
+
+.ggmap iframe,
+.ggmap object,
+.ggmap embed {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.school-teacher-tell {
+	font-weight: 900;
+	color: #FF4F02;
+	font-size: 30px;
+	line-height: 50px;
+	letter-spacing: 5px;
+}
+
+.study-info {
+	margin-top: -17px;
+}
+
+.school-pr-text {
+	background-image: url("greendot.gif");
+    line-height: 25px;
+    margin: 0px;
+}
+
+.contact-form {
+	width: 100%;
+    border-top: 1px dotted #ccc;
+}
+
+.contact-form th, .contact-form td {
+    padding: 20px;
+    border-bottom: 1px dotted #ccc;
+    vertical-align: middle;
+}
+
+.contact-form th {
+	width: 130px;
+	background-color: #EEEEEE;
+}
+
+.contact-form-age {
+	margin-bottom: 0;
+}
+
+.contact-form-phone {
+	margin-top: 6px;
+}
+
+.contact-name {
+	margin-top: 20px;
+}
+
+.contact-form-size {
+	width: 140px;
+}
+
+.contact-form-button {
+	margin: 10px;
+}
+
+.postcode-form {
+    width: 90px !important;
+}
+
+/*completed_massage内容*/
+
+.completed-massage-form {
+	padding: 10px 10px;
+    border-radius:4px;
+    /*border:1px solid #222;*/
+    box-shadow:1px 1px 1px 1px rgba(0, 0, 0, 0.4);
+    margin: 30px -29px;
+    width: 1000px;
+    height:150px;
+    background-color: #fff;
+}
+
+/*applicants_flow内容*/
+
+.applicants-sideber {
+	padding: 31px 35px;
+}
+
+.side-list {
+	border-left: 8px solid #c92ad2;
+}
+
+.applicants-flow {
+	padding: 10px 10px;
+    border-radius:4px;
+    /*border:1px solid #222;*/
+    box-shadow:1px 1px 1px 1px rgba(0, 0, 0, 0.4);
+    margin: 30px -29px;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    /*background-color: #f9f3f1;*/
+    border-left: 8px solid #c92ad2;
+}
+
+ul.flow-list{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+ul.flow-list li{
+	border: 5px solid #FFD5EC;
+    border-radius: 10px;
+    margin-bottom: 35px;
+    padding: 4px 10px;
+    position: relative;
+}
+
+ul.flow-list li::after{bottom: -34px;
+    color: #FF69A3;
+    content: "▼";
+    font-size: 24px !important;
+    left: 48%;
+    position: absolute;
+}
+
+ul.flow-list li.last::after{/*最後の▼を外す*/
+    content: "";
+}
+
+ul.flow-list li h3::first-letter{/*1文字めを大きく*/
+    font-family: garamond,times;
+    font-size: 2rem;
+    font-style: italic;
+    letter-spacing: 0.15em;
+}
+
+.flow-list h3 {
+	margin-top: 0px;
+}
+
+/*applicants_support内容*/
+
+.applicants-support {
+	padding: 10px 10px;
+    border-radius:4px;
+    /*border:1px solid #222;*/
+    box-shadow:1px 1px 1px 1px rgba(0, 0, 0, 0.4);
+    margin: 30px -29px;
+    width: 100%;
+    height:500px;
+    background-color: #fff;
+    border-left: 8px solid #c92ad2;
+}
+
+/*login内容*/
+
+.login-form {
+    padding: 25px;
+}
+
+.form-login {
+    background-color: #EDEDED;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 15px;
+    border-color:#d2d2d2;
+    border-width: 5px;
+    box-shadow:0 1px 0 #cfcfcf;
+}
+
+.login-form-text {
+    border-radius: 10px;
+}
+
+.wrapper {
+    text-align: center;
+}
+
+.login-text{
+	 font-size: 30px;
+	 color: #FF3300;
+     font-weight: 1000;
+     letter-spacing: 5px;
+     text-shadow:
+	    white 2px 0px, white -2px 0px,
+	    white 0px -2px, white -2px 0px,
+	    white 2px 2px, white -2px 2px,
+	    white 2px -2px, white -2px -2px,
+	    white 1px 2px, white -1px 2px,
+	    white 1px -2px, white -1px -2px,
+	    white 2px 1px, white -2px 1px,
+	    white 2px -1px, white -2px -1px;
+}
+
+/*user_top内容*/
+
+.user-nav ul{
+    width: 80%; /*横幅の指定*/
+    margin-left: 11%;   /*左端から20%右側に動かす*/
+}
+
+.user-sidebar {
+	padding: 10px 10px;
+    border-radius:4px;
+    box-shadow:1px 1px 1px 1px rgba(0, 0, 0, 0.4);
+    margin: 30px -29px;
+    width: 100%;
+    height: 100%;
+    background-color: #f9f3f1;
+    border-left: 8px solid #c92ad2;
+}
+
+.info-contents h2 {
+	margin: 0;
+    padding: 2px 0 1px 5px;
+    /*border-left: 5px #FF69A3 solid;*/
+    font-size: 160%;
+    line-height: 100%;
+    border-bottom:1px dotted #ccc;
+}
+
+.info-text dl{
+	margin: 0px 20px 0px;
+}
+
+.info-text dt {
+	font-weight: bold;
+	float: left;
+	width: 8em;
+	font-size: 17px;
+}
+
+.info-text dd {
+	border-bottom:1px dotted #ccc;
+	padding-left: 8em;
+	font-size: 17px;
+}
+
+.info-bar {
+	padding: 10px 10px;
+    border-radius:4px;
+    /*border:1px solid #222;*/
+    box-shadow:1px 1px 1px 1px rgba(0, 0, 0, 0.4);
+    margin: 30px -29px;
+    width: 880px;
+    height: 100%;
+    background-color: #f9f3f1;
+    border-left: 8px solid #c92ad2;
+}
+
+.class-bar {
+	padding: 10px 10px;
+    border-radius:4px;
+    /*border:1px solid #222;*/
+    box-shadow:1px 1px 1px 1px rgba(0, 0, 0, 0.4);
+    width: 880px;
+    height: 100%;
+    margin: 0 0 30px -30px;
+    background-color: #f9f3f1;
+    border-left: 8px solid #c92ad2;
+}
+
+.user-image {
+	margin: 11px 11px 11px 38px;
+	padding:7px;
+    border:1px solid #ccc;
+    background:#fff;
+    box-shadow: 1px 1px 5px rgba(20,20,20,0.2);
+    width: 150px;
+    height: 150px;
+}
+
+.user-sidebar-text th {
+	width: 1px;
+}
+
+/*class_new内容*/
+
+.text-area-pr {
+	resize: vertical;
+    overflow: auto;
+}
+
+.school-info-text {
+	width: 700px;
+}
+
+/*class_edit内容*/
+
+.class-edit-image {
+	width: 100px;
+	height: 100px;
+}
+
+
+/*student_info_index内容*/
+
+.student-info-index {
+	padding: 10px 10px;
+    border-radius:4px;
+    /*border:1px solid #222;*/
+    box-shadow:1px 1px 1px 1px rgba(0, 0, 0, 0.4);
+    margin: 30px -29px;
+    width: 1230px;
+    height: 100%;
+    background-color: #fff;
+    border-left: 8px solid #c92ad2;
+}
+
+.index-position {
+	padding-bottom: 38px !important;
+}
+
+.text-space {
+	width: 26%;
+}

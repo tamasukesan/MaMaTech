@@ -1,0 +1,31 @@
+  <div class="main-visual">
+    <div class="container login-form">
+      <div class="row">
+            <div class="col-md-offset-4 col-md-4 ">
+                  <h4 class="text-center login-text">ログイン</h4>
+                    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                        <%= f.text_field :email, autofocus: true, id:"email", name:"メールアドレス", :class => "form-control input-lg chat-input login-form-text" , :placeholder => "e-mail"%>
+                        </br>
+
+                        <%= f.password_field :password, autocomplete: "off", class: "form-control input-lg chat-input login-form-text", id:"inputPassword", placeholder:"password" %>
+                        </br>
+
+                        <div class="wrapper">
+                          <span class="group-btn">
+                            <%= button_tag type: 'submit', class: "btn btn-warning btn-lg btn-block" do %>
+                              login <i class="fa fa-sign-in" aria-hidden="true"></i>
+                            <% end %>
+                          </span>
+                        </div>
+
+                        <% if devise_mapping.rememberable? -%>
+                            <div class="field">
+                              <%= f.check_box :remember_me %>
+                              <%= f.label :保存する %>
+                            </div>
+                        <% end %>
+                    <% end %>
+            </div>
+      </div>
+    </div>
+  </div>
