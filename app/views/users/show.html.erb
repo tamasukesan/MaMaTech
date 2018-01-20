@@ -1,1 +1,145 @@
-show.html.erb
+	<div class="main-visual">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="user-sidebar">
+						<h4>会員情報</h4>
+						    <table class="table user-sidebar-text">
+						    	<thead>
+						    		<tbody>
+										<tr>
+										    <div class="user-image">
+										    	<% if @user.classwork.present?  %>
+										    	   <%= attachment_image_tag @user.classwork, :teacher_image, :fill, 133, 133, format: 'jpeg' %>
+										    	<% else %>
+										    	   <%= image_tag "no_image.jpg" ,:size => "133x133" %>
+										    	<% end %>
+										    </div>
+										</tr>
+						                <tr>
+						                  <th>お名前</th>
+						              	  <th>
+						              	  	<%= @user.last_name %>
+						              	  	<%= @user.first_name %>
+						              	  </th>
+						                </tr>
+						                <tr>
+						                  <th>電話番号</th>
+						              	  <th>
+						              	  	<%= @user.phone %>
+						              	  </th>
+						                </tr>
+						                <tr>
+						                  <th>E-mail</th>
+						              	  <th>
+						              	  	<%= @user.email %>
+						              	  </th>
+						                </tr>
+						                <tr>
+						                  <th>ご住所</th>
+						              	  <th>〒<%= @user.post_code %>
+						              	  	<br>
+						              	  <%= @user.region.region %>
+						              	  <%= @user.city %>
+						              	  <%= @user.street %>
+						              	 </th>
+						                </tr>
+						            </tbody>
+						        </thead>
+				            </table>
+				            <%= link_to '登録内容の編集', edit_user_path, class: "btn btn-default center-block" %>
+						</div>
+				</div>
+
+				<div class="col-md-9 info-contents">
+					<section class="info-text info-bar">
+						<h2>お知らせ</h2>
+						　<dl>
+							<dt>2017/00/00</dt>
+							<dd>1月の講習会を開催します！</dd>
+							<dt>2017/00/00</dt>
+							<dd>2月の講習会を開催します！</dd>
+							<dt>2017/00/00</dt>
+							<dd>3月の講習会を開催します！</dd>
+							<dt>2017/00/00</dt>
+							<dd>4月の講習会を開催します！</dd>
+						　</dl>
+                    </section>
+				</div>
+
+				<div class="col-md-9">
+					<div class="class-bar">
+						<h3>教室情報</h3>
+						    <table class="table">
+						    	<% if @classwork.present? %>
+						    	<thead>
+						    		<tbody>
+						                <tr>
+						                  <th>教室住所</th>
+						              	  <th class="school-info-text">
+						              	  	〒<%= @classwork.classwork_post_code_first %> - <%= @classwork.classwork_post_code_last %><br>
+						              	    <%= @classwork.region.region %>
+						              	    <%= @classwork.classwork_city %>
+						              	    <%= @classwork.classwork_street %>
+						              	  </th>
+						                </tr>
+						                <tr>
+						                  <th>電話番号</th>
+						              	  <th class="school-info-text">
+						              	  	<%= @classwork.classwork_phone %>
+						              	  </th>
+						                </tr>
+						                <tr>
+						                  <th>E-mail</th>
+						              	  <th class="school-info-text">
+						              	  	<%= @classwork.classwork_email %>
+						              	  </th>
+						                </tr>
+						                <tr>
+						                  <th>対応コース</th>
+						              	  <th class="school-info-text">
+						              	  	<% @classwork.courses.each do |c| %>
+						              	  	<div>
+						              	  	<%= c.course %>
+						              	    </div>
+						              	  	<% end %>
+						              	  </th>
+						                </tr>
+						                <tr>
+						                  <th>開講日時</th>
+						              	  <th class="school-info-text">
+						              	  	<%= @classwork.class_days.each do |d| %>
+						              	  	   <%= d.week %><%= d.start_time %>〜<%= d.finish_time %>
+						              	  	<% end %>
+						              	  </th>
+						                </tr>
+						                <tr>
+						                  <th>経歴</th>
+						              	  <th class="school-info-text">
+						              	     <%= @classwork.career %>
+						              	  </th>
+						                </tr>
+						                <tr>
+						                  <th>教室PR</th>
+						              	  <th class="school-info-text">
+						              	     <%= @classwork.classwork_pr %>
+						              	  </th>
+						                </tr>
+						                <tr>
+						                  <th>公開状況</th>
+						              	  <th class="school-info-text">
+						              	  	<%= @classwork.state %>
+						              	  </th>
+						                </tr>
+						            </tbody>
+						        </thead>
+						        <% else %>
+						        <% end %>
+				            </table>
+				            <a href="class_edit.html" type="button" class="btn btn-default center-block">登録内容の編集</a>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>

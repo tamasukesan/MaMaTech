@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require bootstrap-datetimepicker
  */
 
  @import "bootstrap-sprockets";
@@ -872,4 +873,10 @@ ul.flow-list li h3::first-letter{/*1文字めを大きく*/
 
 .text-space {
 	width: 26%;
+}
+
+// school_new内容
+
+.class-days-form td {
+    padding: 6px;
 }

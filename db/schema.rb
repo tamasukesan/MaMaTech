@@ -10,11 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180114104447) do
+ActiveRecord::Schema.define(version: 20180117053829) do
+
+  create_table "class_courses", force: :cascade do |t|
+    t.integer "classwork_id"
+    t.integer "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "class_days", force: :cascade do |t|
     t.integer "classwork_id"
-    t.integer "week"
+    t.string "week"
     t.string "start_time"
     t.string "finish_time"
     t.datetime "created_at", null: false
@@ -31,7 +38,7 @@ ActiveRecord::Schema.define(version: 20180114104447) do
     t.string "classwork_phone"
     t.string "classwork_email"
     t.text "classwork_pr"
-    t.boolean "state"
+    t.boolean "state", default: true, null: false
     t.string "teacher_image_id"
     t.text "career"
     t.datetime "created_at", null: false
@@ -39,7 +46,6 @@ ActiveRecord::Schema.define(version: 20180114104447) do
   end
 
   create_table "courses", force: :cascade do |t|
-    t.integer "classwork_id"
     t.string "course"
     t.integer "price"
     t.text "explanatory_text"
@@ -72,7 +78,7 @@ ActiveRecord::Schema.define(version: 20180114104447) do
     t.string "parents_last_name_kana"
     t.text "remarks"
     t.integer "correspondence"
-    t.boolean "customer_status"
+    t.boolean "customer_status", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -91,7 +97,7 @@ ActiveRecord::Schema.define(version: 20180114104447) do
 
   create_table "students", force: :cascade do |t|
     t.integer "customer_id"
-    t.boolean "student_status"
+    t.integer "student_status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -116,7 +122,7 @@ ActiveRecord::Schema.define(version: 20180114104447) do
     t.string "city"
     t.string "street"
     t.string "phone"
-    t.boolean "user_status"
+    t.boolean "user_status", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

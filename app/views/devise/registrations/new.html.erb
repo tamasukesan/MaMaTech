@@ -1,4 +1,3 @@
-<%#= javascript_include_tag 'https://ajaxzip3.github.io/ajaxzip3.js' %>
 
   <div class="main-visual">
     <div class="container">
@@ -70,7 +69,7 @@
                       <div class="form-group">
                         <td>
                           <div class="form-inline">
-                            <%= f.text_field :post_code, id:"post_code", name:"post_code", :class => "form-control postcode-form" , maxlength:"7", :placeholder => "1234567" %>
+                            <%= f.text_field :post_code, id:"post_code", name:"user[post_code]", :class => "form-control postcode-form" , maxlength:"7", :placeholder => "1234567" %>
                             <input type="button" id="btn_post_code" class="btn btn-info btn-sm" value="住所の自動入力" onClick="AjaxZip3.zip2addr('user[post_code]','','user[region_key]','user[city]');">
                             </div>
                         </td>
@@ -83,7 +82,6 @@
                                  <div class="row">
                                      <div class="col-md-3">
                                       <%= f.text_field :region_key, id:"region", :class => "form-control" , :placeholder => "都道府県" ,name: "user[region_key]"%>
-                                      <!-- , name:"pref01" -->
                                      </div>
                                  </div>
                              </td>

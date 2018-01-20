@@ -10,7 +10,7 @@ class CreateClassworks < ActiveRecord::Migration[5.1]
       t.string :classwork_phone
       t.string :classwork_email
       t.text :classwork_pr
-      t.boolean :state
+      t.boolean :state, default: true, null: false
       t.string :teacher_image_id
       t.text :career
 
