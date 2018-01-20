@@ -1,5 +1,6 @@
 class Course < ApplicationRecord
 
-  belongs_to :classwork
+  has_many :class_courses
+  has_many :classworks, through: :class_courses
 
 end

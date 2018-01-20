@@ -1,7 +1,6 @@
 class CreateCourses < ActiveRecord::Migration[5.1]
   def change
     create_table :courses do |t|
-      t.integer :classwork_id
       t.string :course
       t.integer :price
       t.text :explanatory_text

@@ -6,7 +6,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
          # authentication_keys: [:region_key]
          # ログインのとき追加したいなら記述
-  has_many :classworks
+  has_one :classwork, :dependent => :destroy
   belongs_to :region
   before_validation :region_to_id,if: :region_exist?
   # バリデーションを行う前に実行したい処理をかける。

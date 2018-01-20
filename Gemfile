@@ -68,3 +68,9 @@ gem 'kaminari'
 gem "font-awesome-rails"
 gem 'rspec-rails'
 gem 'pry-rails'
+gem 'nested_form_fields'
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
+
+
+

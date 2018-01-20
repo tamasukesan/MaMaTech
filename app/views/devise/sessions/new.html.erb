@@ -4,7 +4,7 @@
             <div class="col-md-offset-4 col-md-4 ">
                   <h4 class="text-center login-text">ログイン</h4>
                     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-                        <%= f.text_field :email, autofocus: true, id:"email", name:"メールアドレス", :class => "form-control input-lg chat-input login-form-text" , :placeholder => "e-mail"%>
+                        <%= f.email_field :email, autofocus: true, id:"email", :class => "form-control input-lg chat-input login-form-text" , :placeholder => "e-mail"%>
                         </br>
 
                         <%= f.password_field :password, autocomplete: "off", class: "form-control input-lg chat-input login-form-text", id:"inputPassword", placeholder:"password" %>

@@ -23,7 +23,7 @@ class CreateCustomers < ActiveRecord::Migration[5.1]
       t.string :parents_last_name_kana
       t.text :remarks
       t.integer :correspondence
-      t.boolean :customer_status
+      t.boolean :customer_status, default: true
 
       t.timestamps
     end

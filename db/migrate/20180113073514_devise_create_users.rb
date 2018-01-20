@@ -41,7 +41,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       t.string :city
       t.string :street
       t.string :phone
-      t.boolean :user_status
+      t.boolean :user_status, null: false, default: false
 
       t.timestamps null: false
     end
