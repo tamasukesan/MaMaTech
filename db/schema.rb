@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180117053829) do
+ActiveRecord::Schema.define(version: 20180121111518) do
 
   create_table "class_courses", force: :cascade do |t|
     t.integer "classwork_id"
@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 20180117053829) do
   create_table "class_days", force: :cascade do |t|
     t.integer "classwork_id"
     t.string "week"
-    t.string "start_time"
-    t.string "finish_time"
+    t.time "start_time"
+    t.time "finish_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -61,9 +61,9 @@ ActiveRecord::Schema.define(version: 20180117053829) do
     t.string "customer_last_name"
     t.string "customer_first_name_kana"
     t.string "customer_last_name_kana"
-    t.integer "sex"
+    t.integer "sex", limit: 1, default: 0, null: false
     t.string "age"
-    t.integer "applicant_course"
+    t.integer "course_id"
     t.string "post_code"
     t.integer "region_id"
     t.string "city"
@@ -71,20 +71,21 @@ ActiveRecord::Schema.define(version: 20180117053829) do
     t.string "phone"
     t.string "email"
     t.integer "contact"
-    t.integer "pc"
+    t.integer "pc", limit: 1, default: 0, null: false
     t.string "parents_first_name"
     t.string "parents_last_name"
     t.string "parents_first_name_kana"
     t.string "parents_last_name_kana"
     t.text "remarks"
-    t.integer "correspondence"
-    t.boolean "customer_status", default: true
+    t.integer "correspondence", limit: 1, default: 0, null: false
+    t.boolean "customer_status", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "infos", force: :cascade do |t|
     t.text "info_contents"
+    t.text "create_day"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -97,7 +98,15 @@ ActiveRecord::Schema.define(version: 20180117053829) do
 
   create_table "students", force: :cascade do |t|
     t.integer "customer_id"
-    t.integer "student_status"
+    t.integer "user_id"
+    t.integer "student_status", limit: 1, default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_customers", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "customer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

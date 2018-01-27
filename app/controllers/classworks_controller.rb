@@ -1,10 +1,12 @@
 class ClassworksController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index, :show]
 
   def new
     @classwork = Classwork.new
     @courses = Course.all
     @user = current_user
+    # これから作成したいものを命令することで、表示される。(nested_fields_for)
+    @classwork.class_days.build
   end
 
   def create
@@ -28,18 +30,39 @@ class ClassworksController < ApplicationController
   end
 
   def edit
+    @classwork = Classwork.find(params[:id])
+    @classdays = @classwork.class_days.where(classwork_id: params[:id])
+    @region = Region.find(@classwork.region_id).region
+    @courses = Course.all
   end
 
   def update
+    @classwork = Classwork.find(params[:id])
+    if @classwork.update(classwork_params)
+      redirect_to user_path(current_user.id)
+    else
+      render :edit
+    end
   end
 
   def index
+    @courses = Course.all
+    if params[:search].present?&&params[:search_last].present?
+      @classworks = Classwork.post_code params[:search], params[:search_last]
+    elsif params[:search].present?
+       @classworks = Classwork.post_code_first params[:search]
+    else
+      render "customers/search"
+    end
+    @regions = @classworks.uniq
   end
 
   def destroy
   end
 
   def show
+    @classwork = Classwork.find(params[:id])
+    @customer = Customer.new
   end
 
   private

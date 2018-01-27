@@ -53,11 +53,6 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-group :development, :test do
-  gem 'hirb'
-  gem 'hirb-unicode'
-end
-
 gem 'devise'
 gem 'bootstrap-sass'
 gem 'jquery-rails'
@@ -67,10 +62,15 @@ gem "refile-mini_magick"
 gem 'kaminari'
 gem "font-awesome-rails"
 gem 'rspec-rails'
+gem 'hirb'
+gem 'hirb-unicode'
 gem 'pry-rails'
 gem 'nested_form_fields'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
+gem 'jquery-datatables-rails'
+gem 'gretel'
+
 
 
 

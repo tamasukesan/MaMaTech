@@ -1,1 +1,344 @@
-show.html.erb
+	<div class="main-visual">
+		<div class="container">
+			<div class="row price">
+				<h1>　教室詳細情報</h1>
+				<div class="col-xs-12">
+					<section>
+						<h3 class="c-tit1">
+							<%= @classwork.classwork_city %>
+							<%= @classwork.classwork_street %>教室
+						</h3>
+							<table class="school-show-table">
+								<tr>
+									<th>講師紹介</th>
+									<td>
+										<div class="row">
+											<div class="col-md-4">
+												<p class="school-show-image">
+												   <% if @classwork.teacher_image.present? %>
+											    	      <%= attachment_image_tag @classwork, :teacher_image, :fill, 167, 167, format: 'jpeg' %>
+											       <% else %>
+											    	      <%= image_tag "no_image.jpg" ,:size => "167x167" %>
+											       <% end %>
+											    </p>
+											</div>
+											<div class="col-md-8  school-teacher-Introduction">
+													<b class="school-teacher-name">
+														<%= @classwork.user.last_name %>
+														<%= @classwork.user.first_name %>
+													</b>
+													<p></p>
+													<b class="school-teacher-career">《経歴》</b>
+													<p>
+													  <%= @classwork.career %>
+												    </p>
+											</div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th>所在地</th>
+									<td>
+										<b>〒 <%= @classwork.classwork_post_code_first %>-<%= @classwork.classwork_post_code_last %><br>
+											<%= @classwork.region.region %>
+											<%= @classwork.classwork_city %>
+											<%= @classwork.classwork_street %>
+										</b>
+										<div class="ggmap"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1485.1254599618649!2d141.01187879067507!3d43.21989732085587!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5f0ae1dbe6328751%3A0x3fec3f99457fcd6b!2z44CSMDQ3LTAwNDgg5YyX5rW36YGT5bCP5qi95biC6auY5bO277yT5LiB55uu77yR4oiS77yY!5e0!3m2!1sja!2sjp!4v1515564360450" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe></div>
+									</td>
+								</tr>
+								<tr>
+									<th>連絡先</th>
+									<td class="school-teacher-tell">
+										<%= format_phone(@classwork.classwork_phone) %>
+									</td>
+								</tr>
+								<tr>
+									<th>コース</th>
+									<td>
+										<div class="row">
+											<div class="col-md-8">
+												<% @classwork.courses.each do |c| %>
+		                                             <div>
+		                                        	     <%= c.course %>
+		                                             </div>
+											    <% end %>
+											</div>
+											<div class="col-md-4">
+												<!-- 別タブで開きたい -->
+										        <%= link_to 'コース詳細情報', study_path, class: 'btn btn-warning btn-md pull-right study-info', target: "_blank" %>
+											</div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th>料金</th>
+									<td>
+										<!-- 別タブで開きたい -->
+										<%= link_to '料金についてはこちらからご確認下さい', price_path, class: 'btn btn-warning btn-md', target: "_blank" %>
+									</td>
+								</tr>
+								<tr>
+									<th>開講日時</th>
+									<td>毎週<br>
+										<% @classwork.class_days.each do |d| %>
+										<div>
+											<%= d.week %>
+										    <%= d.start_time.strftime('%H:%M') %> ~ <%= d.finish_time.strftime('%H:%M') %>
+										</div>
+										<% end %>
+									</td>
+								</tr>
+								<tr>
+									<th>教室PR</th>
+									<td>
+										<div class="school-pr-text">
+											<%= simple_format(h (@classwork.classwork_pr)) %>
+										</div>
+									</td>
+								</tr>
+							</table>
+					</section>
+			    </div>
+			</div>
+<a name="contact-form" id="contact-form"></a>
+			<div class="row price">
+				<h2>　お申し込みの方はこちらから</h2>
+
+				   <%= form_for(@customer) do |f| %>
+				        <% if @customer.errors.any? %>
+						       <div id="error_explanation">
+						         <h2><%= @customer.errors.count %>件のエラーがあります。</h2>
+						        <ul>
+						          <%= @customer.errors.full_messages.each do |message| %>
+						          <li><%= message %></li>
+						          <% end %>
+						        </ul>
+						      </div>
+						<% end %>
+
+						<div class="col-xs-12">
+							<section>
+								<table class="contact-form">
+											<tr>
+												<th colspan="2">受講者のお名前 ※</th>
+												<td>
+													<div class="form-inline">
+													  <div class="row">
+														<div class="col-md-3">
+															<span>(漢字)</span>
+															<input type="text" id="student_last_name" name="漢字姓" value="" class="form-control" placeholder="姓">
+														</div>
+														<div class="col-md-3 contact-name">
+															<input type="text" id="student_first_name" name="漢字名" value="" class="form-control" placeholder="名">
+														</div>
+														<div class="col-md-3">
+														<span>(フリガナ)</span>
+															<input type="text" id="student_last_name_kana" name="フリガナセイ" value="" class="form-control" placeholder="セイ">
+														</div>
+														<div class="col-md-3 contact-name">
+															<input type="text" id="student_first_name_kana" name="フリガナメイ" value="" class="form-control" placeholder="メイ">
+														</div>
+													  </div>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<th colspan="2">受講者の性別 ※</th>
+												<td>
+													<label class="radio-inline">
+													  <input type="radio" name="sex" id="sex1" value="option1" checked> 男
+													</label>
+													<label class="radio-inline">
+													  <input type="radio" name="sex" id="sex2" value="option2"> 女
+													</label>
+												</td>
+											</tr>
+											<tr>
+												<th colspan="2">受講者の年齢 ※</th>
+												<td>
+													<div class="form-group contact-form-age">
+														<select name="受講者の年齢">
+									                            <option value="">年齢・学年を選択</option>
+																<option value="0～1歳児"  > 0～1歳児 </option>
+																<option value="2歳児"  > 2歳児 </option>
+																<option value="幼児・年少"  > 幼児・年少 </option>
+																<option value="幼児・年中"  > 幼児・年中 </option>
+																<option value="幼児・年長"  > 幼児・年長 </option>
+																<option value="小学1年生"  > 小学1年生 </option>
+																<option value="小学2年生"  > 小学2年生 </option>
+																<option value="小学3年生"  > 小学3年生 </option>
+																<option value="小学4年生"  > 小学4年生 </option>
+																<option value="小学5年生"  > 小学5年生 </option>
+																<option value="小学6年生"  > 小学6年生 </option>
+																<option value="中学1年生"  > 中学1年生 </option>
+																<option value="中学2年生"  > 中学2年生 </option>
+																<option value="中学3年生"  > 中学3年生 </option>
+														</select>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<th colspan="2">受講希望コース ※</th>
+												<td>
+													<div class="radio">
+													  <label>
+													    <input type="radio" name="コース" id="course" value="option1" checked>
+													    タブレットプログラミングコース
+													  </label>
+													</div>
+													<div class="radio">
+													  <label>
+													    <input type="radio" name="コース" id="course" value="option2">
+													    Scratchプログラミングコース
+													  </label>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<th colspan="2">タブレット・ノートPCの所有 ※</th>
+												<td>
+													<label class="radio-inline">
+													  <input type="radio" name="pc" id="pc1" value="option1" checked> タブレット
+													</label>
+													<label class="radio-inline">
+													  <input type="radio" name="pc" id="pc2" value="option2"> ノートPC
+													</label>
+													<label class="radio-inline">
+													  <input type="radio" name="pc" id="pc3" value="option3"> 両方持っている
+													</label>
+													<label class="radio-inline">
+													  <input type="radio" name="pc" id="pc4" value="option4"> どちらも持っていない
+													</label>
+												</td>
+											</tr>
+											<tr>
+												<th colspan="2">電話番号 ※</th>
+												<div class="form-group">
+												   <td>
+												   	   <div class="row">
+												   	   	    <div class="col-md-4">
+												   	            <input type="text" id="phone" name="電話番号" class="form-control" placeholder="半角数字・ハイフンなし">
+												   	        </div>
+												   	        <div class="col-md-3 contact-form-phone">
+												   	            例)000000000
+												   	        </div>
+												   	   </div>
+												   </td>
+												</div>
+											</tr>
+											<tr>
+												<th colspan="2">メールアドレス ※</th>
+												<div class="form-group">
+													<td>
+														<div class="row">
+													   	   	    <div class="col-md-4">
+													   	            <input type="text" id="email" name="メールアドレス" class="form-control" placeholder="半角英数">
+													   	        </div>
+													   	        <div class="col-md-3 contact-form-phone">
+													   	            例)mama@abc.co.jp
+													   	        </div>
+													   	</div>
+													</td>
+												</div>
+											</tr>
+											<tr>
+												<th colspan="2">ご希望の連絡方法 ※</th>
+												<td>
+													<label class="radio-inline">
+													  <input type="radio" name="contact" id="contact" value="option1" checked> 電話
+													</label>
+													<label class="radio-inline">
+													  <input type="radio" name="contact" id="contact" value="option2"> メール
+													</label>
+													<label class="radio-inline">
+													  <input type="radio" name="contact" id="contact" value="option3"> どちらでもよい
+													</label>
+												</td>
+											</tr>
+											<tr>
+												<th rowspan="4">住所</th>
+												<th class="col2">郵便番号 ※</th>
+												<div class="form-group">
+													<td>
+														<div class="form-inline">
+															<input type="text" id="post_code" name="郵便番号" value="" class="form-control" maxlength="7" placeholder="1234567">
+															<input type="button" id="btn_post_code" class="btn btn-info btn-sm" value="住所の自動入力">
+													    </div>
+													</td>
+												</div>
+												</tr>
+											<tr>
+												<th class="col2">都道府県 ※</th>
+										            <div class="form-group">
+												       <td>
+												       	   <div class="row">
+												       	   	   <div class="col-md-3">
+												       	          <input type="text" id="region" name="都道府県" value="" class="form-control" placeholder="都道府県">
+												       	       </div>
+												       	   </div>
+												       </td>
+										            </div>
+											</tr>
+											<tr>
+												<th class="col2">市区町村 ※</th>
+													<div class="form-group">
+													    <td>
+												       	    <input type="text" id="city" name="市区町村" value="" class="form-control contact-form-size" placeholder="市区町村">
+													   	</td>
+													</div>
+											</tr>
+											<tr>
+												<th class="col2">番地<br>マンション名</th>
+													<div class="form-group">
+													   <td>
+													   	  <input type="text" id="street" name="町域以下住所" value="" class="form-control" placeholder="町域以下住所">
+													   </td>
+													</div>
+											</tr>
+											<tr>
+												<th colspan="2">保護者様のお名前 ※</th>
+													<div class="form-group">
+													    <td>
+															<div class="form-inline">
+															  <div class="row">
+																<div class="col-md-3">
+																(漢字)
+																	<input type="text" id="parents_last_name" name="漢字姓" value="" class="form-control" placeholder="姓">
+																</div>
+																<div class="col-md-3">
+																	<input type="text" id="parents_first_name" name="漢字名" value="" class="form-control contact-name" placeholder="名">
+																</div>
+																<div class="col-md-3">
+																(フリガナ)
+																	<input type="text" id="parents_last_name_kana" name="フリガナセイ" value="" class="form-control" placeholder="セイ">
+																</div>
+																<div class="col-md-3">
+																	<input type="text" id="parents_first_name_kana" name="フリガナメイ" value="" class="form-control contact-name" placeholder="メイ">
+																</div>
+															  </div>
+															</div>
+													    </td>
+													</div>
+											</tr>
+											<tr>
+												<th colspan="2">備考</th>
+												   <td>
+												   	   <div class="form-group">
+													   	    <textarea class="form-control text-area-pr" rows="5" id="pr" placeholder="例 ) 無料体験を希望します。"></textarea>
+												   	   </div>
+												   </td>
+												</div>
+											</tr>
+								</table>
+								<i>※がついてる箇所は必須項目です。</i>
+								<div class="col-md-offset-2 col-md-8">
+									<a href="student_show.html" type="submit" class="btn btn-success btn-block btn-lg contact-form-button">入力内容を確認する</a>
+								</div>
+							</section>
+						</div>
+				    <% end %>
+			</div>
+
+		</div>
+	</div>

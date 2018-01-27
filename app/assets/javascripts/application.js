@@ -11,7 +11,6 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require turbolinks
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
@@ -23,22 +22,41 @@
 
 
 $(function(){
-  $('.datepicker').datetimepicker({
-    format : "YYYY/MM/DD",
-    icons: {
-      previous: "fa fa-arrow-left",
-      next: "fa fa-arrow-right"
-    }
-  });
-  $('.datetimepicker').datetimepicker({
-    format : "HH:mm"
-    icons: {
-      time: "fa fa-clock-o",
-      date: "fa fa-calendar",
-      up: "fa fa-arrow-up",
-      down: "fa fa-arrow-down",
-      previous: "fa fa-arrow-left",
-      next: "fa fa-arrow-right"
-    }
-  });
+	$('#button').bind("click",function(){
+		var re = new RegExp($('#search').val());
+		$('#result tbody tr').each(function(){
+			var txt = $(this).find("td:eq(0)").html();
+			if(txt.match(re) != null){
+				$(this).show();
+			}else{
+				$(this).hide();
+			}
+		});
+	});
+
+	$('#button2').bind("click",function(){
+		$('#search').val('');
+		$('#result tr').show();
+	});
 });
+
+// $(function(){
+//   $('.datepicker').datetimepicker({
+//     format : "YYYY/MM/DD",
+//     icons: {
+//       previous: "fa fa-arrow-left",
+//       next: "fa fa-arrow-right"
+//     }
+//   });
+//   $('.datetimepicker').datetimepicker({
+//     format : "HH:mm"
+//     icons: {
+//       time: "fa fa-clock-o",
+//       date: "fa fa-calendar",
+//       up: "fa fa-arrow-up",
+//       down: "fa fa-arrow-down",
+//       previous: "fa fa-arrow-left",
+//       next: "fa fa-arrow-right"
+//     }
+//   });
+// });

@@ -1,8 +1,28 @@
 	<div class="main-visual">
 		<div class="container">
 			<div class="row price">
+			    <% if @user.user_status == false %>
+			    <div class="classwork-not-page">
+			    	<div class="box15">
+					   <h1>『<%= link_to '教室開講までの流れ', applicants_flow_path %>』をお読みいただき、<br>説明会にご参加ください。</h1>
+				   </div>
+				</div>
+			    <% else %>
+
 				<h2>　教室情報を登録する</h2>
+
 				    <%= form_for(@classwork) do |f| %>
+				        <% if @classwork.errors.any? %>
+						       <div id="error_explanation">
+						         <h2><%= @classwork.errors.count %>件のエラーがあります。</h2>
+						        <ul>
+						          <%= @classwork.errors.full_messages.each do |message| %>
+						          <li><%= message %></li>
+						          <% end %>
+						        </ul>
+						      </div>
+						<% end %>
+
 						<div class="col-xs-12">
 							<section>
 								<table class="contact-form">
@@ -122,19 +142,25 @@
 										<th colspan="2">開講日時 ※</th>
 										    <td>
 										    	<table class="class-days-form">
-										    					<div class="form-group class-days-form">
+										    					<div class="form-group">
 															    	<%= f.nested_fields_for :class_days, wrapper_tag: :tr do |q| %>
-															    	    <td><%= q.select :week, [['月','月'], ['火','火'], ['水','水'], ['木','木'], ['金','金'], ['土','土'], ['日','日']],class: 'form-control' %></td>
-																    	    <td><%= q.time_field :start_time, value: '12:00', class: 'form-control' %>
-																    	    </td>
-																		   	            <td>〜</td>
-																		   	<td><%= q.time_field :finish_time, value: '18:00', class: 'form-control' %>
-																		   	</td>
-																	   	<td><%= q.remove_nested_fields_link '削除', class: 'btn btn-danger btn-sm', role: 'button' %></td>
+															    	    <td>
+															    	    	<%= q.select :week, [['月','月'], ['火','火'], ['水','水'], ['木','木'], ['金','金'], ['土','土'], ['日','日']],class: 'form-control' %>
+															    	    </td>
+															    	    <td>
+															    	    	<%= q.time_field :start_time, value: '12:00', class: 'form-control' %>
+															    	    </td>
+																	   	            <td>〜</td>
+																	   	<td>
+																	   		<%= q.time_field :finish_time, value: '18:00', class: 'form-control' %>
+																	   	</td>
+																	   	<td>
+																	   		<%= q.remove_nested_fields_link '削除', class: 'btn btn-danger btn-sm', role: 'button' %>
+																	   	</td>
 																	<% end %>
 															   	</div>
-															   	<%= f.add_nested_fields_link :class_days, '追加', class: 'btn btn-info btn-sm', role: 'button' %>
 										    	</table>
+										    	<%= f.add_nested_fields_link :class_days, '追加', class: 'btn btn-info btn-sm', role: 'button' %>
 										    </td>
 									</tr>
 									<tr>
@@ -171,6 +197,7 @@
 							</section>
 						</div>
 				    <% end %>
+				<% end %>
 			</div>
 		</div>
 	</div>

@@ -1,0 +1,195 @@
+	<div class="main-visual">
+		<div class="container">
+			<div class="row price">
+				<h2>　教室情報を編集する</h2>
+				<%= form_for(@classwork) do |f| %>
+
+				        <% if @classwork.errors.any? %>
+						       <div id="error_explanation">
+						         <h2><%= @classwork.errors.count %>件のエラーがあります。</h2>
+						        <ul>
+						          <%= @classwork.errors.full_messages.each do |message| %>
+						          <li><%= message %></li>
+						          <% end %>
+						        </ul>
+						      </div>
+						<% end %>
+
+						<div class="col-xs-12">
+							<section>
+								<table class="contact-form">
+									<form>
+											<tr>
+												<th colspan="2">対応コース ※</th>
+												<td>
+													<div class="radio">
+													  <label>
+													    <%= f.collection_check_boxes(:course_ids, @courses, :id, :course) do |b| %>
+													    <div>
+												    	<%= b.label { b.check_box + b.text}  %>
+												    	<% end %>
+												        </div>
+													  </label>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<th colspan="2">電話番号 ※</th>
+												<div class="form-group">
+												   <td>
+												   	   <div class="row">
+												   	   	    <div class="col-md-4">
+												   	            <%= f.text_field :classwork_phone, autofocus: true, id:"classwork_phone", :class => "form-control" , :placeholder => "半角数字・ハイフンなし" %>
+												   	        </div>
+												   	        <div class="col-md-3 contact-form-phone">
+												   	            例)000000000
+												   	        </div>
+												   	   </div>
+												   </td>
+												</div>
+											</tr>
+											<tr>
+												<th colspan="2">メールアドレス ※</th>
+												<div class="form-group">
+													<td>
+														<div class="row">
+													   	   	    <div class="col-md-4">
+													   	            <%= f.email_field :classwork_email, id:"classwork_email", :class => "form-control" , :placeholder => "半角英数"%>
+													   	        </div>
+													   	        <div class="col-md-3 contact-form-phone">
+													   	            例)mama@abc.co.jp
+													   	        </div>
+													   	</div>
+													</td>
+												</div>
+											</tr>
+											<tr>
+												<th rowspan="4">住所</th>
+												<th class="col2">郵便番号 ※</th>
+												<div class="form-group">
+													<td>
+														<div class="form-inline">
+															<%= f.text_field :classwork_post_code_first, id:"classwork_post_code_first", name:"classwork[classwork_post_code_first]", :class => "form-control class-postcode" , maxlength:"3", :placeholder => "123", :style => "width: 50px;" %>
+															 ー 
+															 <%= f.text_field :classwork_post_code_last, id:"classwork_post_code_last", name:"classwork[classwork_post_code_last]", :class => "form-control class-postcode" , maxlength:"4", :placeholder => "4567", :style => "width: 80px;" %>
+															 <input type="button" id="btn_post_code" class="btn btn-info btn-sm" value="住所の自動入力" onClick="AjaxZip3.zip2addr('classwork[classwork_post_code_first]','classwork[classwork_post_code_last]','classwork[region_key]','classwork[classwork_city]');">
+													    </div>
+													</td>
+												</div>
+												</tr>
+											<tr>
+												<th class="col2">都道府県 ※</th>
+										            <div class="form-group">
+												       <td>
+												       	   <div class="row">
+												       	   	   <div class="col-md-3">
+												       	          <%= f.text_field :region_key, value: @region, class: "form-control" , :placeholder => "都道府県" ,name: "classwork[region_key]"%>
+												       	       </div>
+												       	   </div>
+												       </td>
+										            </div>
+											</tr>
+											<tr>
+												<th class="col2">市区町村 ※</th>
+													<div class="form-group">
+													    <td>
+												       	    <%= f.text_field :classwork_city, id:"classwork_city", name:"classwork[classwork_city]", :class => "form-control contact-form-size" , :placeholder => "市区町村"%>
+													   	</td>
+													</div>
+											</tr>
+											<tr>
+												<th class="col2">番地<br>マンション名</th>
+													<div class="form-group">
+													   <td>
+													   	  <%= f.text_field :classwork_street, id: "classwork_street", :class => "form-control" , :placeholder => "町域以下住所"%>
+													   </td>
+													</div>
+											</tr>
+											<tr>
+												<th colspan="2">講師の顔写真 ※</th>
+												   <td>
+												   	<%= attachment_image_tag @classwork, :teacher_image, :fill, 133, 133, format: 'jpeg' %>
+													   	   <div class="input-group">
+
+															    <label class="input-group-btn">
+															        <%= f.attachment_field :teacher_image, placeholder: "画像を選択", :class => "btn btn-defauit" %>
+															    </label>
+															    <!-- <input type="text" class="form-control" readonly=""> -->
+															</div>
+												   </td>
+												</div>
+											</tr>
+											<tr>
+												<th colspan="2">経歴 ※</th>
+												   <td>
+												   	   <div class="form-group">
+													   	    <%= f.text_area :career, id:"career", :class => "form-control text-area-pr", row: "5" %>
+												   	   </div>
+												   </td>
+												</div>
+											</tr>
+　　　　　　　　　　　　　　　　　　　　　<tr>
+										<th colspan="2">開講日時 ※</th>
+										    <td>
+										    	<table class="class-days-form">
+										    					<div class="form-group class-days-form">
+															    	    <%# @classdays.each do |classday| %>
+															    	<%= f.nested_fields_for :class_days, wrapper_tag: :tr do |q| %>
+																    	    <td>
+																    	    	<%= q.select :week, [['月','月'], ['火','火'], ['水','水'], ['木','木'], ['金','金'], ['土','土'], ['日','日']],class: 'form-control' %>
+																    	    </td>
+																	    	<td>
+																	    		<%= q.time_field :start_time, class: 'form-control' %>
+																	    	</td>
+																			   	            <td>〜</td>
+																			<td>
+																				<%= q.time_field :finish_time, class: 'form-control' %>
+																			</td>
+																		   	<td>
+																		   		<%= q.remove_nested_fields_link '削除', class: 'btn btn-danger btn-sm', role: 'button' %>
+																		    </td>
+																	<% end %>
+															   	</div>
+										    	</table>
+										    	<%= f.add_nested_fields_link :class_days, '追加', class: 'btn btn-info btn-sm', role: 'button' %>
+										    </td>
+									</tr>
+											<tr>
+												<th colspan="2">教室PR ※</th>
+												   <td>
+												   	   <div class="form-group">
+													   	    <%= f.text_area :classwork_pr, id:"classwork_pr", :class => "form-control text-area-pr", row: "5" %>
+												   	   </div>
+												   </td>
+												</div>
+											</tr>
+											<tr>
+												<th colspan="2">公開状況 ※</th>
+												   <td>
+												   	   <div class="form-group">
+												   	   	    <div class="row">
+												   	   	    	<div class="col-md-3">
+																    <%= f.label :公開する %>
+																    <%= f.check_box :state, id: :state,:as => :boolean %>
+																</div>
+																<i>
+																　　※公開しない場合はチェックを外してください。
+																</i>
+														    </div>
+													   </div>
+												   </td>
+												</div>
+											</tr>
+									</form>
+								</table>
+								<i>※がついてる箇所は必須項目です。</i>
+								<div class="col-md-offset-2 col-md-8">
+									<%= f.submit"変更する", class:"btn btn-success btn-block btn-lg contact-form-button" %>
+								</div>
+							</section>
+						</div>
+				<% end %>
+			</div>
+
+		</div>
+	</div>

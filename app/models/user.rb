@@ -7,6 +7,8 @@ class User < ApplicationRecord
          # authentication_keys: [:region_key]
          # ログインのとき追加したいなら記述
   has_one :classwork, :dependent => :destroy
+  has_many :user_customers
+  has_many :students
   belongs_to :region
   before_validation :region_to_id,if: :region_exist?
   # バリデーションを行う前に実行したい処理をかける。
