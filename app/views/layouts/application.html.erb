@@ -24,11 +24,17 @@
 			</div>
 			<nav class="nav">
 				<ul class="nav-list">
+					<% if current_user.classwork.present? %>
+						<li>
+							<%= link_to '登録内容の編集', edit_classwork_path(current_user.classwork) %>
+						</li>
+					<% else %>
+						<li>
+							<%= link_to '教室情報を登録', new_classwork_path %>
+						</li>
+					<% end %>
 					<li>
-						<%= link_to '教室情報を登録', new_classwork_path %>
-					</li>
-					<li>
-						<%= link_to 'お申し込み一覧', customers_path %>
+						<%= link_to 'お申し込み一覧', users_manage_customer_path(current_user) %>
 					</li>
 					<li>
 						<%= link_to '生徒一覧', students_path %>

@@ -3,8 +3,8 @@ class CreateClassDays < ActiveRecord::Migration[5.1]
     create_table :class_days do |t|
       t.integer :classwork_id
       t.string :week
-      t.string :start_time
-      t.string :finish_time
+      t.time :start_time
+      t.time :finish_time
 
       t.timestamps
     end

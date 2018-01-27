@@ -23,23 +23,40 @@ class UsersController < ApplicationController
   	@user = User.find(params[:id])
     @classwork = @user.classwork
     @course = ClassCourse.where(classwork_id: @classwork)
+    @infos = Info.all
   end
 
   def manage_customer
-
+    @user = User.find(params[:id])
+    @classwork = @user.classwork
+    # trueのデータだけを探して表示する。
+    @customers = @classwork.customers.where(customer_status: true).all
   end
 
   def show_customer
-
+    # @user = current_user
+    @customer = Customer.find(params[:id])
   end
 
-  def edit_customer_details
+  # def edit_customer_details
 
-  end
+  # end
 
   private
   def user_params
-      params.require(:user).permit(:email, :first_name, :last_name, :first_name_kana, :last_name_kana, :post_code, :region_key, :city, :street, :phone, :user_status)
+      params.require(:user).permit(:email,
+                                   :first_name,
+                                   :last_name,
+                                   :first_name_kana,
+                                   :last_name_kana,
+                                   :post_code,
+                                   :region_key,
+                                   :city,
+                                   :street,
+                                   :phone,
+                                   :user_status,
+                                   :customer_id
+                                   )
   end
 
 end

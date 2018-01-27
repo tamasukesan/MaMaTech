@@ -1,1 +1,75 @@
-index.html.erb
+	<div class="main-visual">
+		<div class="container">
+			<div class="row price">
+				<h1>　教室検索</h1>
+				<div class="col-xs-12">
+					<section>
+						<h3 class="school-area-title">
+							<% @regions.each do |r| %>
+								<%= r.region.region %>
+							<% end %>
+						　　(全<%= @classworks.count %>件)</h3>
+
+							<table class="school-area-table">
+								<thead>
+								<tr>
+									<th>所在地</th>
+									<th>教室名</th>
+									<th>講師名</th>
+									<% @courses.each do |course| %>
+										<th><%= course.course %></th>
+									<% end %>
+									<th>詳細案内</th>
+								</tr>
+								</thead>
+								<tbody>
+									<% @classworks.each do |classwork| %>
+										<tr>
+											<td><%= classwork.region.region %></td>
+											<td><%= classwork.classwork_city %><%= classwork.classwork_street %></td>
+											<td><%= classwork.user.last_name %><%= classwork.user.first_name %></td>
+
+                                            <!-- courseテーブルにあるidがclassworkに紐づくClass_courseのcourse_idにあるか判断 -->
+											<% @courses.each do |course| %>
+												<td><%= course_id_present?(course, classwork.class_courses) %></td>
+											<% end %>
+
+
+
+<!-- 　　　　　　　　　　　　　　　　　　　　　　　　　　ボツ２ -->
+											<%# if classwork.class_courses.presence %>
+												<%# classwork.class_courses.each do |class_course| %>
+													<!-- <td><%#= class_course.course_id_exist? %></td> -->
+												<%# end %>
+											<%# else %>
+												<%# (Course.all.count - classwork.class_courses.count).times do %>
+													<!-- <td>-</td> -->
+												<%# end %>
+											<%# end %>
+
+<!-- 　　　　　　　　　　　　　　　　　　　　　　　　　　ボツ１ -->
+											<%# @courses.each do |course| %>
+											<%# classwork.class_courses.each do |class_course| %>
+											  	<%# @courses.each do |course| %>
+													<%# if class_course.course_id == course.id %>
+													<%# if @courses.course_id_exist?(course) %>
+														 <!-- <td>◯</td> -->
+													<%# else %>
+													     <!-- <td>-</td> -->
+													<%# end %>
+											 	<%# end %>
+											<%# end %>
+
+											<td>
+												<%= link_to '教室情報', classwork_path(classwork), class: 'btn btn-warning btn-md' %>
+											</td>
+										</tr>
+									<% end %>
+
+								</tbody>
+							</table>
+					</section>
+			    </div>
+			</div>
+		</div>
+	</div>

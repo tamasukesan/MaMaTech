@@ -10,6 +10,19 @@ class Classwork < ApplicationRecord
 
   accepts_nested_attributes_for :class_days, allow_destroy: true
 
+  # 郵便番号頭３桁による絞り込み
+  scope :post_code_first, ->(search) { where("classwork_post_code_first like ?", "#{search}%")}
+  # 郵便番号おしり４桁による絞り込み
+  scope :post_code_last, ->(search_last) { where("classwork_post_code_last like ?", "%#{search_last}%")}
+
+  # 郵便番号３桁＋４桁の検索
+  def self.post_code(search, search_last)
+    post = post_code_first(search) + post_code_last(search_last)
+    post.uniq
+    # 重複するレコードがあれば削除メソッド
+  end
+
+
   # accepts_nested_attributes_for :class_courses, allow_destroy: true
 
   attachment :teacher_image

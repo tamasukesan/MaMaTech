@@ -1,5 +1,7 @@
+<% breadcrumb :price %>
 	<div class="main-visual">
 		<div class="container">
+			<%= render partial: 'customers/breadcrumb' %>
 			<div class="row price">
 				<div class="col-xs-12">
 					<section>
@@ -19,16 +21,14 @@
 									<th>受講料（月謝）</th>
 								</tr>
 								</thead>
-								<tbody>
-								<tr>
-									<th>タブレットプログラミングコース</th>
-									<td>7,000円</td>
-								</tr>
-								<tr>
-									<th>Scratchプログラミングコース</th>
-									<td>11,000円</td>
-								</tr>
-								</tbody>
+								<% @courses.each do |course| %>
+									<tbody>
+										<tr>
+											<th><%= course.course %></th>
+											<td><%= course.price.to_s(:delimited) %>円</td>
+										</tr>
+									</tbody>
+								<% end %>
 							</table>
 
 						<h3 class="c-tit1" style="margin-bottom: 0px;">タブレット・ノートPCレンタル料金</h3>

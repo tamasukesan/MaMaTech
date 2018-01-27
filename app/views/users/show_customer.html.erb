@@ -1,1 +1,123 @@
-show_customer.html.erb
+	<div class="main-visual">
+		<div class="container">
+			<div class="row price">
+				<h2>　詳細情報</h2>
+				<div class="col-xs-12">
+					<section>
+						<table class="contact-form">
+									<tr>
+										<th colspan="2">受講者のお名前</th>
+										<td>
+											(漢字)　<%= @customer.customer_last_name %>  <%= @customer.customer_first_name %>
+											(フリガナ)　<%= @customer.customer_last_name_kana %>　<%= @customer.customer_first_name_kana %>
+										</td>
+									</tr>
+									<tr>
+										<th colspan="2">
+											受講者の性別
+										</th>
+										<td>
+											<%= @customer.sex %>
+										</td>
+									</tr>
+									<tr>
+										<th colspan="2">受講者の年齢</th>
+										<td>
+											<%= @customer.age %>
+										</td>
+									</tr>
+									<tr>
+										<th colspan="2">受講希望コース</th>
+										<td>
+											<%= @customer.course.course %>
+										</td>
+									</tr>
+									<tr>
+										<th colspan="2">タブレット・ノートPCの所有</th>
+										<td>
+											<%= @customer.pc %>
+										</td>
+									</tr>
+									<tr>
+										<th colspan="2">電話番号</th>
+										   <td>
+										   	   <%= @customer.phone %>
+										   </td>
+									</tr>
+									<tr>
+										<th colspan="2">メールアドレス</th>
+										<td>
+											<%= @customer.email %>
+										</td>
+									</tr>
+									<tr>
+										<th colspan="2">ご希望の連絡方法</th>
+										<td>
+											<%= @customer.contact %>
+										</td>
+									</tr>
+									<tr>
+										<th rowspan="4">住所</th>
+										<th class="col2">郵便番号</th>
+										<td>
+											<%= @customer.post_code %>
+										</td>
+									</tr>
+									<tr>
+										<th class="col2">都道府県</th>
+										       <td>
+										       	   <%= @customer.region.region %>
+										       </td>
+									</tr>
+									<tr>
+										<th class="col2">市区町村</th>
+											    <td>
+										       	    <%= @customer.city %>
+											   	</td>
+									</tr>
+									<tr>
+										<th class="col2">番地<br>マンション名</th>
+											   <td>
+											   	 <%= @customer.street %>
+											   </td>
+									</tr>
+									<tr>
+										<th colspan="2">保護者様のお名前</th>
+											    <td>
+													(漢字)　<%= @customer.parents_last_name %>  <%= @customer.parents_first_name %>
+											        (フリガナ)　<%= @customer.parents_last_name_kana %>　<%= @customer.parents_first_name_kana %>
+											    </td>
+									</tr>
+									<tr>
+										<th colspan="2">備考</th>
+											    <td>
+													<%= @customer.remarks %>
+											    </td>
+									</tr>
+									<tr>
+										<th colspan="2">対応状況</th>
+											    <td>
+													<div class="form-inline">
+														<%= form_for(@customer, path: customer_path(@customer), method: :patch) do |f| %>
+													    <%=  f.select :correspondence, Customer.correspondences.keys %>
+													    <%= f.submit "変更", class: "btn btn-info btn-sm" %>
+													    <% end %>
+
+													 </div>
+											    </td>
+									</tr>
+						</table>
+						<div class="col-md-offset-2 col-md-8">
+							<%= form_for(Student.new, path:students_path, method: :post) do |f| %>
+							<!-- パラメータを直接フォームから入力させないまま値を受け渡したい時に使用 -->
+							<%= f.hidden_field :customer_id , value: @customer.id %>
+							<%= f.hidden_field :user_id , value: current_user.id %>
+							<%= f.submit "入学を確定する", class: "btn btn-success btn-block btn-lg contact-form-button" %>
+							<% end %>
+						</div>
+					</section>
+				</div>
+			</div>
+
+		</div>
+	</div>

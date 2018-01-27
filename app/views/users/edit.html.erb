@@ -3,6 +3,7 @@
 			<div class="row price">
 				<h2>　ユーザー登録情報編集</h2>
 				    <%= form_for(@user) do |f| %>
+
 				             <% if @user.errors.any? %>
 						       <div id="error_explanation">
 						         <h2><%= @user.errors.count %>件のエラーがあります。</h2>

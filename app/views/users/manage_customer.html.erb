@@ -1,1 +1,53 @@
-manage_customer.html.erb
+
+	<div class="main-visual">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 student-info-index">
+					<h3 class="col-md-3 col-md-offset-5">お申し込み一覧</h3>
+				    <table class="table table-hover table-autofilter">
+						<thead>
+							<tr>
+								<th class="text-center index-position">名前</th>
+								<th class="text-center index-position">性別</th>
+								<th class="text-center index-position">年齢</th>
+								<th class="text-center index-position">コース</th>
+								<th class="text-center table-filterable">対応状況</th>
+								<th class="text-center index-position" >詳細情報</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% @customers.each do |customer| %>
+								<tr>
+									<td class="text-center">
+										<ruby>
+											<%= customer.customer_last_name %>
+											<%= customer.customer_first_name %>
+											<rt>
+												<%= customer.customer_last_name_kana %>
+												<%= customer.customer_first_name_kana %>
+											</rt>
+										</ruby>
+									</td>
+									<td class="text-center">
+										<%= customer.sex %>
+									</td>
+									<td class="text-center">
+										<%= customer.age %>
+									</td>
+									<td class="text-center">
+										<%= customer.course.course %>
+									</td>
+									<td class="text-center">
+										<%= customer.correspondence %>
+									</td>
+									<td class="text-center">
+										<%= link_to '詳細', users_show_customer_path(current_user, customer), class: 'btn btn-default center-block' %>
+									</td>
+								</tr>
+							<% end %>
+						</tbody>
+		            </table>
+		        </div>
+			</div>
+		</div>
+	</div>

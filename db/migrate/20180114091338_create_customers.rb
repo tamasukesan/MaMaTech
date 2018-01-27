@@ -6,9 +6,9 @@ class CreateCustomers < ActiveRecord::Migration[5.1]
       t.string :customer_last_name
       t.string :customer_first_name_kana
       t.string :customer_last_name_kana
-      t.integer :sex
+      t.integer :sex, default: 0, null: false, limit: 1
       t.string :age
-      t.integer :applicant_course
+      t.integer :course_id
       t.string :post_code
       t.integer :region_id
       t.string :city
@@ -16,14 +16,14 @@ class CreateCustomers < ActiveRecord::Migration[5.1]
       t.string :phone
       t.string :email
       t.integer :contact
-      t.integer :pc
+      t.integer :pc, default: 0, null: false, limit: 1
       t.string :parents_first_name
       t.string :parents_last_name
       t.string :parents_first_name_kana
       t.string :parents_last_name_kana
       t.text :remarks
-      t.integer :correspondence
-      t.boolean :customer_status, default: true
+      t.integer :correspondence, default: 0, null: false, limit: 1
+      t.boolean :customer_status, null: false, default: true
 
       t.timestamps
     end
