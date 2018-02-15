@@ -197,12 +197,21 @@ a.banner-image-hover{
 
 footer {
   width: 100%;
-  height: 200px;
+  height: 220px;
   background: linear-gradient(-45deg,
 		rgba(245, 244, 239, 0.17),
 		rgba(247, 245, 241, 0.91)),
 	url(ohana.jpg);
   background-size: cover;
+  font-size: 80%;
+}
+
+footer address{
+    color: #000;
+    letter-spacing: 5px;
+    text-align: center;
+    margin-bottom: 0;
+    margin-top: 10px
 }
 
 .footer-logo {
@@ -240,12 +249,45 @@ footer {
 .school-detail-image {
 	width: 330px;
 	height: 176px;
-	margin-top: 8px;
+	margin-top: 65px;
 }
 
 .school-detail-text {
 	line-height: 2;
 	font-size: 17px;
+}
+
+.slider {
+    padding: 0 30px 30px;
+}
+
+.slider2 {
+    margin-top: 10px;
+}
+
+.box24 {
+    position: relative;
+    padding: 0.5em 0.7em;
+    margin: 1.4em 0;
+    background: #ffe6ed;
+    color: #d04242;
+    font-weight: bold;
+    text-align: center;
+}
+.box24:after {
+    position: absolute;
+    content: '';
+    top: 100%;
+    left: 30px;
+    border: 15px solid transparent;
+    border-top: 15px solid #ffe6ed;
+    width: 0;
+    height: 0;
+}
+.box24 p {
+    margin: -18px 0 0;
+    padding: 0;
+    font-size: 22px;
 }
 
 /*study内容*/
@@ -577,11 +619,11 @@ a.banner2-image-hover{
 	margin-top: 2px;
 }
 
-.school-pr-text {
-	background-image: url("greendot.gif");
-    line-height: 25px;
-    margin: 0px;
-}
+// .school-pr-text {
+// 	background-image: url("greendot.gif");
+//     line-height: 25px;
+//     margin: 0px;
+// }
 
 .contact-form {
 	width: 100%;
@@ -881,7 +923,7 @@ ul.flow-list li h3::first-letter{/*1文字めを大きく*/
 	width: 26%;
 }
 
-// school_new内容
+// classwork_new内容
 
 .class-days-form td {
     padding: 6px;
@@ -894,6 +936,18 @@ ul.flow-list li h3::first-letter{/*1文字めを大きく*/
     background-image: url(pc2.jpg);
     background-size: cover;
     background-position: center;
+}
+
+.classwork-not-page2 {
+    width: 117%;
+    height: 650px;
+    background-image: url(pc2.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.text-position {
+    margin-top: -19px;
 }
 
 .classwork-not-page h1 {
@@ -951,8 +1005,45 @@ ul.flow-list li h3::first-letter{/*1文字めを大きく*/
 
 .breadcrumbs {
     margin: 10px 0 -13px 0;
+    color: #FF97C2 !important;
 }
 
+// map
+
+#map {
+    height: 500px;
+    width: 100%;
+}
+
+// エラーメッセージ
+#error_explanation {
+    color: red;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.alert {
+    padding: 5px;
+    margin-bottom: 2px;
+}
+
+.field_with_errors {
+    display: inline;
+}
+
+// pagination
+.pagination > .active > a, {
+    background-color: #ff572247 !important;
+    border-color: #b7337047 !important;
+}
+
+.pagination > li > a, .pagination > li > span {
+    color: #E91E63 !important;
+}
+
+.paginate {
+    margin: 0 443px;
+}
 
 
 

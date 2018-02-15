@@ -1,19 +1,26 @@
+<% breadcrumb :search %>
+
 	<div class="main-visual">
 		<div class="container">
+		<%= render partial: 'customers/breadcrumb' %>
 			<div class="row">
 				<h1>　教室検索</h1>
 				<div class="col-xs-3 search-panel">
 					<div class="panel panel-default text-center">
 						  <div class="panel-heading search-panel-text">郵便番号から探す</div>
 						  <div class="panel-body">
-						    <p class="search-text-post">郵便番号をご入力のうえ<br>検索ボタンを押してください。</p>
+						    <p class="search-text-post">郵便番号をご入力のうえ<br>検索ボタンを押してください。<br>
+						    </p>
+						    <p style="font-size: 5px;">
+						    (最初の３ケタだけでも検索できます。)
+						    </p>
 					      </div>
 					      <%= form_tag classworks_path, :method => 'get', class:"search-form form-inline" do %>
 			                   <div class="form-group">
-			                   	〒 <%= text_field_tag :search, params[:search], class:"search-form-first", size:"5" %>
+			                   	〒 <%= text_field_tag :search_post_first, params[:search_post_first], class:"search-form-first", size:"5" %>
 			                   </div>
 			                   <div class="form-group">
-			                        ー <%= text_field_tag :search_last, params[:search_last], class:"search-form-last", size:"6" %>
+			                        ー <%= text_field_tag :search_post_last, params[:search_post_last], class:"search-form-last", size:"6" %>
 			                   </div>
 			                   <br>
 			                   <div class="row">
@@ -24,63 +31,9 @@
 			              <% end %>
 					</div>
 			    </div>
-			        <div class="col-xs-9 search-panel">
-			    	    <div class="panel panel-default">
-						    <div class="panel-heading search-panel-text">地図から都道府県別に探す</div>
-							  	<div class="panel-body search-image">
-							  		<%= image_tag "nihonchizu.jpg" ,usemap:"#ImageMap", alt: "日本地図" %>
-										<map name="ImageMap">
-										  <area shape="rect" coords="735,308,807,344" href="school_index.html" alt="北海道" />
-										  <area shape="rect" coords="734,419,807,456" href="#" alt="青森" />
-										  <area shape="rect" coords="735,456,807,492" href="#" alt="岩手" />
-										  <area shape="rect" coords="735,493,806,528" href="#" alt="宮城" />
-										  <area shape="rect" coords="735,530,806,566" href="#" alt="秋田" />
-										  <area shape="rect" coords="735,567,808,603" href="#" alt="山形" />
-										  <area shape="rect" coords="735,604,808,640" href="#" alt="福島" />
-										  <area shape="rect" coords="650,309,722,343" href="#" alt="東京" />
-										  <area shape="rect" coords="650,344,721,381" href="#" alt="神奈川" />
-										  <area shape="rect" coords="649,380,723,420" href="#" alt="埼玉" />
-										  <area shape="rect" coords="650,419,721,454" href="#" alt="千葉" />
-										  <area shape="rect" coords="650,456,723,493" href="#" alt="茨城" />
-										  <area shape="rect" coords="650,493,721,528" href="#" alt="栃木" />
-										  <area shape="rect" coords="650,530,723,566" href="#" alt="群馬" />
-										  <area shape="rect" coords="566,419,638,456" href="#" alt="新潟" />
-										  <area shape="rect" coords="566,456,638,492" href="#" alt="富山" />
-										  <area shape="rect" coords="566,493,639,530" href="#" alt="石川" />
-										  <area shape="rect" coords="566,530,639,567" href="#" alt="福井" />
-										  <area shape="rect" coords="491,419,566,455" href="#" alt="山梨" />
-										  <area shape="rect" coords="492,455,565,493" href="#" alt="長野" />
-										  <area shape="rect" coords="491,494,565,529" href="#" alt="岐阜" />
-										  <area shape="rect" coords="492,531,564,565" href="#" alt="静岡" />
-										  <area shape="rect" coords="491,567,565,602" href="#" alt="愛知" />
-										  <area shape="rect" coords="269,71,340,105" href="#" alt="滋賀" />
-										  <area shape="rect" coords="269,108,341,143" href="#" alt="奈良" />
-										  <area shape="rect" coords="269,144,341,180" href="#" alt="和歌山" />
-										  <area shape="rect" coords="268,182,342,218" href="#" alt="三重" />
-										  <area shape="rect" coords="194,71,267,105" href="#" alt="大阪" />
-										  <area shape="rect" coords="192,108,269,143" href="#" alt="兵庫" />
-										  <area shape="rect" coords="195,145,267,179" href="#" alt="京都" />
-										  <area shape="rect" coords="107,71,180,107" href="#" alt="鳥取" />
-										  <area shape="rect" coords="108,108,180,143" href="#" alt="島根" />
-										  <area shape="rect" coords="108,145,181,180" href="#" alt="岡山" />
-										  <area shape="rect" coords="107,182,181,219" href="#" alt="広島" />
-										  <area shape="rect" coords="108,219,180,254" href="#" alt="山口" />
-										  <area shape="rect" coords="108,302,181,339" href="#" alt="香川" />
-										  <area shape="rect" coords="108,339,180,375" href="#" alt="徳島" />
-										  <area shape="rect" coords="108,376,179,412" href="#" alt="愛媛" />
-										  <area shape="rect" coords="107,413,181,449" href="#" alt="高知" />
-										  <area shape="rect" coords="20,72,93,105" href="#" alt="福岡" />
-										  <area shape="rect" coords="21,108,93,144" href="#" alt="佐賀" />
-										  <area shape="rect" coords="19,145,92,180" href="#" alt="大分" />
-										  <area shape="rect" coords="20,182,93,216" href="#" alt="長崎" />
-										  <area shape="rect" coords="20,219,93,254" href="#" alt="熊本" />
-										  <area shape="rect" coords="19,255,92,290" href="#" alt="宮崎" />
-										  <area shape="rect" coords="20,293,92,327" href="#" alt="鹿児島" />
-										  <area shape="rect" coords="19,376,91,410" href="#" alt="沖縄" />
-										</map>
-							  	</div>
-						</div>
-					</div>
+
+			    <%= render 'customers/imagemap',search_region: :search_region %>
+
 			</div>
 		</div>
 	</div>

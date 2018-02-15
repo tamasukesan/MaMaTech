@@ -2,26 +2,16 @@
 		<div class="container">
 			<div class="row price">
 			    <% if @user.user_status == false %>
-			    <div class="classwork-not-page">
-			    	<div class="box15">
-					   <h1>『<%= link_to '教室開講までの流れ', applicants_flow_path %>』をお読みいただき、<br>説明会にご参加ください。</h1>
-				   </div>
-				</div>
+				    <div class="classwork-not-page">
+				    	<div class="box15">
+						   <h1>『<%= link_to '教室開講までの流れ', applicants_flow_path %>』をお読みいただき、<br>説明会にご参加ください。</h1>
+					   </div>
+					</div>
 			    <% else %>
 
 				<h2>　教室情報を登録する</h2>
 
 				    <%= form_for(@classwork) do |f| %>
-				        <% if @classwork.errors.any? %>
-						       <div id="error_explanation">
-						         <h2><%= @classwork.errors.count %>件のエラーがあります。</h2>
-						        <ul>
-						          <%= @classwork.errors.full_messages.each do |message| %>
-						          <li><%= message %></li>
-						          <% end %>
-						        </ul>
-						      </div>
-						<% end %>
 
 						<div class="col-xs-12">
 							<section>
@@ -30,16 +20,17 @@
 										<th colspan="2">対応コース ※</th>
 										<td>
 											<div class="radio">
-											  <label>
+											  <!-- <label> -->
 											    <%#= f.fields_for :class_courses do |c| %>
-												    <%= f.collection_check_boxes(:course_ids, @courses, :id, :course, {:checked => 1}) do |b| %>
+												    <%= f.collection_check_boxes(:course_ids, Course.all, :id, :course, {:checked => 1}) do |b| %>
 												    <div>
 												    	<%= b.label { b.check_box + b.text}  %>
 												    	<% end %>
 												    </div>
 												<%# end %>
-											  </label>
+											  <!-- </label> -->
 											</div>
+											<%= error_messages!(@classwork,:course_ids,"対応コース ") %>
 										</td>
 									</tr>
 									<tr>
@@ -54,6 +45,7 @@
 										   	            例)000000000
 										   	        </div>
 										   	   </div>
+										   	   <%= error_messages!(@classwork,:classwork_phone,"電話番号 ") %>
 										   </td>
 										</div>
 									</tr>
@@ -69,6 +61,7 @@
 											   	            例)mama@abc.co.jp
 											   	        </div>
 											   	</div>
+											   	<%= error_messages!(@classwork,:classwork_email,"メールアドレス ") %>
 											</td>
 										</div>
 									</tr>
@@ -83,6 +76,8 @@
 													 <%= f.text_field :classwork_post_code_last, id:"classwork_post_code_last", name:"classwork[classwork_post_code_last]", :class => "form-control class-postcode" , maxlength:"4", :placeholder => "4567", :style => "width: 80px;" %>
 													 <input type="button" id="btn_post_code" class="btn btn-info btn-sm" value="住所の自動入力" onClick="AjaxZip3.zip2addr('classwork[classwork_post_code_first]','classwork[classwork_post_code_last]','classwork[region_key]','classwork[classwork_city]');">
 											    </div>
+											    <%= error_messages!(@classwork,:classwork_post_code_first,"郵便番号頭３桁 ") %>
+											    <%= error_messages!(@classwork,:classwork_post_code_last,"郵便番号下４桁 ") %>
 											</td>
 										</div>
 										</tr>
@@ -95,6 +90,7 @@
 										       	          <%= f.text_field :region_key, id:"region", :class => "form-control" , :placeholder => "都道府県" ,name: "classwork[region_key]"%>
 										       	       </div>
 										       	   </div>
+										       	   <%= error_messages!(@classwork,:region_key,"都道府県 ") %>
 										       </td>
 								            </div>
 									</tr>
@@ -103,6 +99,7 @@
 											<div class="form-group">
 											    <td>
 										       	    <%= f.text_field :classwork_city, id:"classwork_city", name:"classwork[classwork_city]", :class => "form-control contact-form-size" , :placeholder => "市区町村"%>
+													<%= error_messages!(@classwork,:classwork_city,"市区町村 ") %>
 											   	</td>
 											</div>
 									</tr>
@@ -126,6 +123,7 @@
 												    </label>
 												    <!-- <input type="text" class="form-control" readonly=""> -->
 												</div>
+												<%#= error_messages!(@classwork,:teacher_image_id,"講師の顔写真 ") %>
 										   </td>
 										</div>
 									</tr>
@@ -135,6 +133,7 @@
 										   	   <div class="form-group">
 											   	    <%= f.text_area :career, id:"career", :class => "form-control text-area-pr", row: "5" %>
 										   	   </div>
+											   <%= error_messages!(@classwork,:career,"経歴 ") %>
 										   </td>
 										</div>
 									</tr>
@@ -142,7 +141,7 @@
 										<th colspan="2">開講日時 ※</th>
 										    <td>
 										    	<table class="class-days-form">
-										    					<div class="form-group">
+										    					<div class="form-group class-days-form">
 															    	<%= f.nested_fields_for :class_days, wrapper_tag: :tr do |q| %>
 															    	    <td>
 															    	    	<%= q.select :week, [['月','月'], ['火','火'], ['水','水'], ['木','木'], ['金','金'], ['土','土'], ['日','日']],class: 'form-control' %>
@@ -161,6 +160,7 @@
 															   	</div>
 										    	</table>
 										    	<%= f.add_nested_fields_link :class_days, '追加', class: 'btn btn-info btn-sm', role: 'button' %>
+										    	<%= error_messages!(@classwork,:class_days,"開講日時 ") %>
 										    </td>
 									</tr>
 									<tr>
@@ -169,6 +169,7 @@
 										   	   <div class="form-group">
 										   	   	<%= f.text_area :classwork_pr, id:"classwork_pr", :class => "form-control text-area-pr", row: "5" %>
 										   	   </div>
+										   	   <%= error_messages!(@classwork,:classwork_pr,"教室PR ") %>
 										   </td>
 										</div>
 									</tr>

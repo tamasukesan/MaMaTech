@@ -13,6 +13,8 @@ class CreateClassworks < ActiveRecord::Migration[5.1]
       t.boolean :state, default: true, null: false
       t.string :teacher_image_id
       t.text :career
+      t.float :latitude
+      t.float :longitude
 
       t.timestamps
     end

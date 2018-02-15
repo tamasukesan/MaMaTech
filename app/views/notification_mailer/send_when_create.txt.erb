@@ -1,0 +1,23 @@
+===============================
+<%= @customer.parents_last_name %>様
+===============================
+
+お問い合わせいただきありがとうございます。
+  	＜お問い合わせ内容＞
+  	教室名:<%= @classwork.classwork_city %>教室
+  	※教室の詳細情報はこちらから
+  	<%= @url %>
+  	
+  	受講生のお名前:<%= @customer.customer_last_name %><%= @customer.customer_first_name %>
+  	受講者の性別:<%= @customer.sex %>
+  	受講者の年齢:<%= @customer.age.age_name %>
+  	受講希望コース:<%= @customer.course.course %>
+  	電話番号:<%= @customer.phone %>
+  	メールアドレス:<%= @customer.email %>
+  	ご希望の連絡方法:<%= @customer.contact %>
+  	住所:<%= @customer.region.region %><%= @customer.city %><%= @customer.street %>
+  	保護者様のお名前:<%= @customer.parents_last_name %><%= @customer.parents_first_name %>
+  	備考:<%= @customer.remarks %>
+  	
+  	担当者からご希望の連絡方法でご連絡いたします。
+  	何卒宜しくお願い致します。

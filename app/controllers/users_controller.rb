@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  PER = 30
 
   def edit
     @user = User.find(params[:id])
@@ -30,7 +31,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @classwork = @user.classwork
     # trueのデータだけを探して表示する。
-    @customers = @classwork.customers.where(customer_status: true).all
+    if @classwork.present?
+    @customers = @classwork.customers.where(customer_status: true).page(params[:page]).per(PER)
+    else
+    @customers = nil
+    end
   end
 
   def show_customer

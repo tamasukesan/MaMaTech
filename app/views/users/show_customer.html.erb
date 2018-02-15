@@ -23,7 +23,7 @@
 									<tr>
 										<th colspan="2">受講者の年齢</th>
 										<td>
-											<%= @customer.age %>
+											<%= @customer.age.age_name %>
 										</td>
 									</tr>
 									<tr>
@@ -41,7 +41,7 @@
 									<tr>
 										<th colspan="2">電話番号</th>
 										   <td>
-										   	   <%= @customer.phone %>
+										   	   <%= format_phone(@customer.phone) %>
 										   </td>
 									</tr>
 									<tr>
@@ -60,7 +60,7 @@
 										<th rowspan="4">住所</th>
 										<th class="col2">郵便番号</th>
 										<td>
-											<%= @customer.post_code %>
+											<%= format_post(@customer.post_code) %>
 										</td>
 									</tr>
 									<tr>

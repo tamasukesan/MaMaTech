@@ -1,5 +1,11 @@
+<%# breadcrumb :root, @user %>
+
 	<div class="main-visual">
 		<div class="container">
+		<%#= render partial: 'customers/breadcrumb' %>
+ 		<div class="breadcrumbs ">
+			<%= @user.last_name %> <%= @user.first_name %>さんのページ
+		</div>
 			<div class="row">
 				<div class="col-md-3">
 					<div class="user-sidebar">
@@ -41,7 +47,7 @@
 						                </tr>
 						                <tr>
 						                  <th>ご住所</th>
-						              	  <th class="user-sidebar-content">〒<%= @user.post_code %>
+						              	  <th class="user-sidebar-content">〒<%= format_post(@user.post_code) %>
 						              	  	<br>
 						              	  <%= @user.region.region %>
 						              	  <%= @user.city %>
@@ -52,6 +58,7 @@
 						        </thead>
 				            </table>
 				            <%= link_to '登録内容の編集', edit_user_path, class: "btn btn-default center-block" %>
+				            <%= link_to 'パスワードの変更', edit_user_registration_path, class: "btn btn-default center-block" %>
 						</div>
 				</div>
 

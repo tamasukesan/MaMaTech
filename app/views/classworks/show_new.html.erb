@@ -1,0 +1,142 @@
+<%# breadcrumb :classwork, @classwork %>
+
+	<div class="main-visual">
+		<div class="container">
+		<%= render partial: 'customers/breadcrumb' %>
+			<div class="row price">
+				<h1>　教室詳細情報</h1>
+				<div class="col-xs-12">
+					<section>
+						<h3 class="c-tit1">
+							<%= @classwork.classwork_city %>
+							<%= @classwork.classwork_street %>教室
+						</h3>
+							<table class="school-show-table">
+								<tr>
+									<th>講師紹介</th>
+									<td>
+										<div class="row">
+											<div class="col-md-4">
+												<p class="school-show-image">
+												   <% if @classwork.teacher_image.present? %>
+											    	      <%= attachment_image_tag @classwork, :teacher_image, :fill, 167, 167, format: 'jpeg' %>
+											       <% else %>
+											    	      <%= image_tag "no_image.jpg" ,:size => "167x167" %>
+											       <% end %>
+											    </p>
+											</div>
+											<div class="col-md-8  school-teacher-Introduction">
+													<b class="school-teacher-name">
+														<%= @classwork.user.last_name %>
+														<%= @classwork.user.first_name %>
+													</b>
+													<p></p>
+													<b class="school-teacher-career">《経歴》</b>
+													<p>
+													  <%= simple_format(h (@classwork.career)) %>
+												    </p>
+											</div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th>所在地</th>
+									<td>
+										<b>〒 <%= @classwork.classwork_post_code_first %>-<%= @classwork.classwork_post_code_last %><br>
+											<%= @classwork.region.region %>
+											<%= @classwork.classwork_city %>
+											<%= @classwork.classwork_street %>
+										</b>
+ 　　　　　　　　　　　　　　　　　　　　　　　　　<div id="map"></div>
+									</td>
+								</tr>
+								<tr>
+									<th>連絡先</th>
+									<td class="school-teacher-tell">
+										<%= format_phone(@classwork.classwork_phone) %>
+									</td>
+								</tr>
+								<tr>
+									<th>コース</th>
+									<td>
+										<div class="row">
+											<div class="col-md-8">
+												<% @classwork.courses.each do |c| %>
+		                                             <div>
+		                                        	     ● <%= c.course %>
+		                                             </div>
+											    <% end %>
+											</div>
+											<div class="col-md-4">
+												<!-- 別タブで開きたい -->
+										        <%= link_to 'コース詳細情報', study_path, class: 'btn btn-warning btn-md pull-right study-info', target: "_blank" %>
+											</div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th>料金</th>
+									<td>
+										<!-- 別タブで開きたい -->
+										<%= link_to '料金についてはこちらからご確認下さい', price_path, class: 'btn btn-warning btn-md', target: "_blank" %>
+									</td>
+								</tr>
+								<tr>
+									<th>開講日時</th>
+									<td>毎週<br>
+										<% @classwork.class_days.each do |d| %>
+										<div>
+											<%= d.week %>
+										    <%= d.start_time.strftime('%H:%M') %> ~ <%= d.finish_time.strftime('%H:%M') %>
+										</div>
+										<% end %>
+									</td>
+								</tr>
+								<tr>
+									<th>教室PR</th>
+									<td>
+										<div class="school-pr-text">
+											<%= simple_format(h (@classwork.classwork_pr)) %>
+										</div>
+									</td>
+								</tr>
+							</table>
+					</section>
+			    </div>
+			</div>
+<div id="contact_form">
+ <%= render 'classworks/form' %>
+</div>
+		</div>
+	</div>
+
+
+<script>
+function initMap() {
+    var test ={lat: <%= @classwork.latitude %>, lng: <%= @classwork.longitude %>};
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 15,
+        center: test
+    });
+    var transitLayer = new google.maps.TransitLayer();
+    transitLayer.setMap(map);
+
+    var contentString = "住所：<%= @classwork.region.region %><%= @classwork.classwork_city %><%= @classwork.classwork_street %>";
+    var infowindow = new google.maps.InfoWindow({
+        content: contentString
+    });
+
+    var marker = new google.maps.Marker({
+        position:test,
+        map: map,
+        title: contentString
+    });
+
+    marker.addListener('click', function() {
+        infowindow.open(map, marker);
+    });
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPwHWUyT8d21-wLyMhOhe_xU2lGpOP_vY&callback=initMap"
+async defer>
+</script>

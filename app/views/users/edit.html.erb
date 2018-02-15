@@ -1,128 +1,124 @@
-	<div class="main-visual">
-		<div class="container">
-			<div class="row price">
-				<h2>　ユーザー登録情報編集</h2>
-				    <%= form_for(@user) do |f| %>
+<div class="main-visual">
+	<div class="container">
+		<div class="row price">
+			<h2>　ユーザー登録情報編集</h2>
+			    <%= form_for(@user) do |f| %>
 
-				             <% if @user.errors.any? %>
-						       <div id="error_explanation">
-						         <h2><%= @user.errors.count %>件のエラーがあります。</h2>
-						        <ul>
-						          <%= @user.errors.full_messages.each do |message| %>
-						          <li><%= message %></li>
-						          <% end %>
-						        </ul>
-						      </div>
-						     <% end %>
-
-						<div class="col-xs-12">
-							<section>
-								<table class="contact-form">
-									<form>
-											<tr>
-												<th colspan="2">お名前 ※</th>
-												<td>
-													<div class="form-inline">
-													  <div class="row">
-														<div class="col-md-3">
-															<span>(漢字)</span>
-															<%= f.text_field :last_name, class: "form-control", :placeholder => "姓"%>
-														</div>
-														<div class="col-md-3 contact-name">
-															<%= f.text_field :first_name, class: "form-control", :placeholder => "名" %>
-														</div>
-														<div class="col-md-3">
-														<span>(フリガナ)</span>
-														　　<%= f.text_field :last_name_kana, class: "form-control", :placeholder => "セイ" %>
-														</div>
-														<div class="col-md-3 contact-name">
-															<%= f.text_field :first_name_kana, class: "form-control", :placeholder => "メイ" %>
-														</div>
-													  </div>
+					<div class="col-xs-12">
+						<section>
+							<table class="contact-form">
+										<tr>
+											<th colspan="2">お名前 ※</th>
+											<td>
+												<div class="form-inline">
+												  <div class="row">
+													<div class="col-md-3">
+														<span>(漢字)</span>
+														<%= f.text_field :last_name, class: "form-control", :placeholder => "姓"%>
+														<%= error_messages!(@user,:last_name,"苗字(漢字) ") %>
 													</div>
-												</td>
-											</tr>
-											<tr>
-												<th colspan="2">電話番号 ※</th>
-												<div class="form-group">
-												   <td>
-												   	   <div class="row">
+													<div class="col-md-3 contact-name">
+														<%= f.text_field :first_name, class: "form-control", :placeholder => "名" %>
+														<%= error_messages!(@user,:first_name,"名前(漢字)") %>
+													</div>
+													<div class="col-md-3">
+													<span>(フリガナ)</span>
+													　　<%= f.text_field :last_name_kana, class: "form-control", :placeholder => "セイ" %>
+													   <%= error_messages!(@user,:last_name_kana,"苗字(カナ)") %>
+													</div>
+													<div class="col-md-3 contact-name">
+														<%= f.text_field :first_name_kana, class: "form-control", :placeholder => "メイ" %>
+														<%= error_messages!(@user,:first_name_kana,"名前(カナ)") %>
+													</div>
+												  </div>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<th colspan="2">電話番号 ※</th>
+											<div class="form-group">
+											   <td>
+											   	   <div class="row">
+											   	   	    <div class="col-md-4">
+											   	            <%= f.text_field :phone, class: "form-control", :placeholder => "半角数字・ハイフンなし" %>
+											   	            <%= error_messages!(@user,:phone,"電話番号") %>
+											   	        </div>
+											   	        <div class="col-md-3 contact-form-phone">
+											   	            例)000000000
+											   	        </div>
+											   	   </div>
+											   </td>
+											</div>
+										</tr>
+										<tr>
+											<th colspan="2">メールアドレス ※</th>
+											<div class="form-group">
+												<td>
+													<div class="row">
 												   	   	    <div class="col-md-4">
-												   	            <%= f.text_field :phone, class: "form-control", :placeholder => "半角数字・ハイフンなし" %>
+												   	            <%= f.email_field :email, class: "form-control", :placeholder => "半角英数" %>
+												   	            <%= error_messages!(@user,:email,"メールアドレス") %>
 												   	        </div>
 												   	        <div class="col-md-3 contact-form-phone">
-												   	            例)000000000
+												   	            例)mama@abc.co.jp
 												   	        </div>
-												   	   </div>
+												   	</div>
+												</td>
+											</div>
+										</tr>
+
+										<tr>
+											<th rowspan="4">住所</th>
+											<th class="col2">郵便番号 ※</th>
+											<div class="form-group">
+												<td>
+													<div class="form-inline">
+														<%= f.text_field :post_code, class: "form-control", :placeholder => "1234567" %>
+														<input type="button" id="btn_post_code" class="btn btn-info btn-sm" value="住所の自動入力" onClick="AjaxZip3.zip2addr('user[post_code]','','user[region_key]','user[city]');">
+														<%= error_messages!(@user,:post_code,"郵便番号") %>
+												    </div>
+												</td>
+											</div>
+										</tr>
+										<tr>
+											<th class="col2">都道府県 ※</th>
+									            <div class="form-group">
+											       <td>
+											       	   <div class="row">
+											       	   	   <div class="col-md-3">
+											       	   	   	<%= f.text_field :region_key, value: @region, class: "form-control", :placeholder => "都道府県" ,name: "user[region_key]" %>
+											       	   	   	<%= error_messages!(@user,:region,"都道府県") %>
+											       	       </div>
+											       	   </div>
+											       </td>
+									            </div>
+										</tr>
+										<tr>
+											<th class="col2">市区町村 ※</th>
+												<div class="form-group">
+												    <td>
+											       	    <%= f.text_field :city, name:"user[city]", :class => "form-control contact-form-size" , :placeholder => "市区町村"%>
+											       	    <%= error_messages!(@user,:city,"市区町村") %>
+												   	</td>
+												</div>
+										</tr>
+										<tr>
+											<th class="col2">番地<br>マンション名</th>
+												<div class="form-group">
+												   <td>
+												   	  <%= f.text_field :street, :class => "form-control" , :placeholder => "町域以下住所"%>
 												   </td>
 												</div>
-											</tr>
-											<tr>
-												<th colspan="2">メールアドレス ※</th>
-												<div class="form-group">
-													<td>
-														<div class="row">
-													   	   	    <div class="col-md-4">
-													   	            <%= f.email_field :email, class: "form-control", :placeholder => "半角英数" %>
-													   	        </div>
-													   	        <div class="col-md-3 contact-form-phone">
-													   	            例)mama@abc.co.jp
-													   	        </div>
-													   	</div>
-													</td>
-												</div>
-											</tr>
-
-											<tr>
-												<th rowspan="4">住所</th>
-												<th class="col2">郵便番号 ※</th>
-												<div class="form-group">
-													<td>
-														<div class="form-inline">
-															<%= f.text_field :post_code, class: "form-control", :placeholder => "1234567" %>
-															<input type="button" id="btn_post_code" class="btn btn-info btn-sm" value="住所の自動入力" onClick="AjaxZip3.zip2addr('user[post_code]','','user[region_key]','user[city]');">
-													    </div>
-													</td>
-												</div>
-											</tr>
-											<tr>
-												<th class="col2">都道府県 ※</th>
-										            <div class="form-group">
-												       <td>
-												       	   <div class="row">
-												       	   	   <div class="col-md-3">
-												       	   	   	<%= f.text_field :region_key, value: @region, class: "form-control", :placeholder => "都道府県" ,name: "user[region_key]" %>
-												       	       </div>
-												       	   </div>
-												       </td>
-										            </div>
-											</tr>
-											<tr>
-												<th class="col2">市区町村 ※</th>
-													<div class="form-group">
-													    <td>
-												       	    <%= f.text_field :city, name:"user[city]", :class => "form-control contact-form-size" , :placeholder => "市区町村"%>
-													   	</td>
-													</div>
-											</tr>
-											<tr>
-												<th class="col2">番地<br>マンション名</th>
-													<div class="form-group">
-													   <td>
-													   	  <%= f.text_field :street, :class => "form-control" , :placeholder => "町域以下住所"%>
-													   </td>
-													</div>
-											</tr>
-									</form>
-								</table>
-								<i>※がついてる箇所は必須項目です。</i>
-								<div class="col-md-offset-2 col-md-8">
-									<%= f.submit"変更する", class:"btn btn-success btn-block btn-lg contact-form-button" %>
-								</div>
-							</section>
-						</div>
-					<% end %>
-			</div>
-
+										</tr>
+							</table>
+							<i>※がついてる箇所は必須項目です。</i>
+							<div class="col-md-offset-2 col-md-8">
+								<%= f.submit"変更する", class:"btn btn-success btn-block btn-lg contact-form-button" %>
+							</div>
+						</section>
+					</div>
+				<% end %>
 		</div>
+
 	</div>
+</div>

@@ -2,9 +2,9 @@ class ClassworksController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def new
-    @classwork = Classwork.new
-    @courses = Course.all
     @user = current_user
+    @classwork = Classwork.new
+    # @courses = Course.all
     # これから作成したいものを命令することで、表示される。(nested_fields_for)
     @classwork.class_days.build
   end
@@ -13,6 +13,9 @@ class ClassworksController < ApplicationController
     @user = current_user
     # has_oneなので、newを渡さずに、外部参照キーを自動でセットしてくる記述
     @classwork = @user.build_classwork(classwork_params)
+    # 都道府県＋市区町村＋丁目番地以下を結合させる
+    @classwork.address = params[:classwork][:region_key] + params[:classwork][:classwork_city] + params[:classwork][:classwork_street]
+    # binding.pry
     if @classwork.save
     #collection_check_boxesを使っているので今回は不要
     #course_idsの配列をバラして保存
@@ -25,7 +28,7 @@ class ClassworksController < ApplicationController
     #   end
       redirect_to user_path(current_user)
     else
-      render :new
+      render :action => "new", :layout => "second_layout"
     end
   end
 
@@ -33,11 +36,13 @@ class ClassworksController < ApplicationController
     @classwork = Classwork.find(params[:id])
     @classdays = @classwork.class_days.where(classwork_id: params[:id])
     @region = Region.find(@classwork.region_id).region
-    @courses = Course.all
+    # @courses = Course.all
   end
 
   def update
     @classwork = Classwork.find(params[:id])
+    # 都道府県＋市区町村＋丁目番地以下を結合させる
+    @classwork.address = params[:classwork][:region_key] + params[:classwork][:classwork_city] + params[:classwork][:classwork_street]
     if @classwork.update(classwork_params)
       redirect_to user_path(current_user.id)
     else
@@ -47,22 +52,30 @@ class ClassworksController < ApplicationController
 
   def index
     @courses = Course.all
-    if params[:search].present?&&params[:search_last].present?
-      @classworks = Classwork.post_code params[:search], params[:search_last]
-    elsif params[:search].present?
-       @classworks = Classwork.post_code_first params[:search]
+    # @classwork_state = Classwork.where("state = t")
+    if params[:search_post_first].present? && params[:search_post_last].present?
+      @classworks = Classwork.post_code params[:search_post_first], params[:search_post_last]
+      @regions = @classworks.uniq
+    elsif params[:search_post_first].present?
+      @classworks = Classwork.post_code_first params[:search_post_first]
+      @regions = @classworks.uniq
+    elsif params[:search_region].present?
+      @classworks = Classwork.region_search params[:search_region]
+      @regions = @classworks.uniq
+      # @classworks = Region.find_by(region: params[:search_region]).classworks
     else
       render "customers/search"
     end
-    @regions = @classworks.uniq
   end
 
   def destroy
   end
 
   def show
+    # Rails.logger.info(session["customer_all"])
     @classwork = Classwork.find(params[:id])
     @customer = Customer.new
+    @age = Age.all
   end
 
   private
@@ -80,6 +93,8 @@ class ClassworksController < ApplicationController
                                         :teacher_image,
                                         :career,
                                         :user_id,
+                                        :latitude,
+                                        :longitude,
                                         course_ids: [],
                                         class_days_attributes: [:id,
                                                                 :classwork_id,
@@ -90,6 +105,33 @@ class ClassworksController < ApplicationController
                                         ]
                                         )
   end
+
+  # def customer_params
+  #     params.require(:customer).permit(:classwork_id,
+  #                                      :customer_first_name,
+  #                                      :customer_last_name,
+  #                                      :customer_first_name_kana,
+  #                                      :customer_last_name_kana,
+  #                                      :sex,
+  #                                      :age_id,
+  #                                      :course_id,
+  #                                      :post_code,
+  #                                      :region_key,
+  #                                      :city,
+  #                                      :street,
+  #                                      :phone,
+  #                                      :email,
+  #                                      :contact,
+  #                                      :pc,
+  #                                      :parents_first_name,
+  #                                      :parents_last_name,
+  #                                      :parents_first_name_kana,
+  #                                      :parents_last_name_kana,
+  #                                      :remarks,
+  #                                      :correspondence,
+  #                                      :customer_status
+  #                                      )
+  # end
 end
 
 # hash = {key1 => value1, ley2 => value2}

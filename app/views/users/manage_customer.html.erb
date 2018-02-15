@@ -5,48 +5,87 @@
 				<div class="col-md-12 student-info-index">
 					<h3 class="col-md-3 col-md-offset-5">お申し込み一覧</h3>
 				    <table class="table table-hover table-autofilter">
-						<thead>
-							<tr>
-								<th class="text-center index-position">名前</th>
-								<th class="text-center index-position">性別</th>
-								<th class="text-center index-position">年齢</th>
-								<th class="text-center index-position">コース</th>
-								<th class="text-center table-filterable">対応状況</th>
-								<th class="text-center index-position" >詳細情報</th>
-							</tr>
-						</thead>
-						<tbody>
-							<% @customers.each do |customer| %>
+				    	<% if @customers.present? %>
+							<thead>
 								<tr>
-									<td class="text-center">
-										<ruby>
-											<%= customer.customer_last_name %>
-											<%= customer.customer_first_name %>
-											<rt>
-												<%= customer.customer_last_name_kana %>
-												<%= customer.customer_first_name_kana %>
-											</rt>
-										</ruby>
-									</td>
-									<td class="text-center">
-										<%= customer.sex %>
-									</td>
-									<td class="text-center">
-										<%= customer.age %>
-									</td>
-									<td class="text-center">
-										<%= customer.course.course %>
-									</td>
-									<td class="text-center">
-										<%= customer.correspondence %>
-									</td>
-									<td class="text-center">
-										<%= link_to '詳細', users_show_customer_path(current_user, customer), class: 'btn btn-default center-block' %>
-									</td>
+									<th class="text-center index-position">名前</th>
+									<th class="text-center index-position">性別</th>
+									<th class="text-center index-position">年齢</th>
+									<th class="text-center index-position">コース</th>
+									<th class="text-center table-filterable">対応状況</th>
+									<th class="text-center index-position" >詳細情報</th>
 								</tr>
+							</thead>
+						<% else %>
+							<thead>
+								<tr>
+									<th class="text-center">名前</th>
+									<th class="text-center">性別</th>
+									<th class="text-center">年齢</th>
+									<th class="text-center">コース</th>
+									<th class="text-center">対応状況</th>
+									<th class="text-center">詳細情報</th>
+								</tr>
+							</thead>
+						<% end %>
+						<tbody>
+							<% if @customers.present? %>
+								<% @customers.each do |customer| %>
+									<tr>
+										<td class="text-center">
+											<ruby>
+												<%= customer.customer_last_name %>
+												<%= customer.customer_first_name %>
+												<rt>
+													<%= customer.customer_last_name_kana %>
+													<%= customer.customer_first_name_kana %>
+												</rt>
+											</ruby>
+										</td>
+										<td class="text-center">
+											<%= customer.sex %>
+										</td>
+										<td class="text-center">
+											<%= customer.age.age_name %>
+										</td>
+										<td class="text-center">
+											<%= customer.course.course %>
+										</td>
+										<td class="text-center">
+											<%= customer.correspondence %>
+										</td>
+										<td class="text-center">
+											<%= link_to '詳細', users_show_customer_path(current_user, customer), class: 'btn btn-default center-block' %>
+										</td>
+									</tr>
+								<% end %>
+							<% else %>
+							       <tr>
+										<td class="text-center">
+											<ruby>
+												<rt>
+											</ruby>
+										</td>
+										<td class="text-center">
+										</td>
+										<td class="text-center">
+										</td>
+										<td class="text-center">
+										</td>
+										<td class="text-center">
+										</td>
+										<td class="text-center">
+										</td>
+									</tr>
 							<% end %>
 						</tbody>
 		            </table>
+		            <% if @customers.present? %>
+				        <div class="paginate">
+						  <%= paginate @customers %>
+						</div>
+					<% else %>
+					<% end %>
 		        </div>
 			</div>
 		</div>

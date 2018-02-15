@@ -1,0 +1,438 @@
+<!-- <div id="home"></div> -->
+<div class="row price">
+	<h2>　お申し込みの方はこちらから</h2>
+
+	<%= form_for @customer, url: {:controller => :customers, action: 'confirm'} do |f| %>
+	<%# Rails.logger.info(@customer.errors.messages[:customer_first_name]) %>
+			<div class="col-xs-12">
+				<section>
+					<table class="contact-form">
+								<tr>
+									<th colspan="2">受講者のお名前 ※</th>
+									<td>
+										<div class="form-inline">
+										  <div class="row">
+										  	<% if session[:customer_all] == nil %>
+													<div class="col-md-3">
+														<span>(漢字)</span>
+														<%= f.text_field :customer_last_name, autofocus: false, id:"customer_last_name", :class => "form-control" , :placeholder => "姓" %>
+													</div>
+													<div class="col-md-3 contact-name">
+														<%= f.text_field :customer_first_name, autofocus: false, id:"customer_first_name", :class => "form-control" , :placeholder => "名" %>
+													</div>
+													<div class="col-md-3">
+													<span>(フリガナ)</span>
+													　　<%= f.text_field :customer_last_name_kana, autofocus: false, id:"customer_last_name_kana", :class => "form-control" , :placeholder => "セイ" %>
+													</div>
+													<div class="col-md-3 contact-name">
+														<%= f.text_field :customer_first_name_kana, autofocus: false, id:"customer_first_name_kana", :class => "form-control" , :placeholder => "メイ" %>
+													</div>
+											<% else %>
+											        <div class="col-md-3">
+														<span>(漢字)</span>
+														<%= f.text_field :customer_last_name, autofocus: false, id:"customer_last_name", :class => "form-control" , :placeholder => "姓", :value => "#{session[:customer_all]["customer_last_name"]}" %>
+														<%= error_messages!(@customer,:customer_last_name,"苗字(漢字) ") %>
+													</div>
+													<div class="col-md-3 contact-name">
+														<%= f.text_field :customer_first_name, autofocus: false, id:"customer_first_name", :class => "form-control" , :placeholder => "名", :value => "#{session[:customer_all]["customer_first_name"]}" %>
+														<%= error_messages!(@customer,:customer_first_name,"名前(漢字)") %>
+													</div>
+													<div class="col-md-3">
+														<span>(フリガナ)</span>
+														<%= f.text_field :customer_last_name_kana, autofocus: false, id:"customer_last_name_kana", :class => "form-control" , :placeholder => "セイ", :value => "#{session[:customer_all]["customer_last_name_kana"]}" %>
+														<%= error_messages!(@customer,:customer_last_name_kana,"苗字(カナ)") %>
+													</div>
+													<div class="col-md-3 contact-name">
+														<%= f.text_field :customer_first_name_kana, autofocus: false, id:"customer_first_name_kana", :class => "form-control" , :placeholder => "メイ", :value => "#{session[:customer_all]["customer_first_name_kana"]}" %>
+														<%= error_messages!(@customer,:customer_first_name_kana,"名前(カナ)") %>
+													</div>
+											<% end %>
+										  </div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th colspan="2">受講者の性別 ※</th>
+									<td>
+										<% if session[:customer_all] == nil %>
+											<label class="radio-inline">
+											  <%= f.radio_button :sex, :男, checked: "checked" %>
+											  <%= f.label :男 %>
+											</label>
+											<label class="radio-inline">
+											  <%= f.radio_button :sex, :女 %>
+											  <%= f.label :女 %>
+											</label>
+										<% elsif session[:customer_all]["sex"] == "男" %>
+											<label class="radio-inline">
+											  <%= f.radio_button :sex, :男, checked: "checked" %>
+											  <%= f.label :男 %>
+											</label>
+											<label class="radio-inline">
+											  <%= f.radio_button :sex, :女 %>
+											  <%= f.label :女 %>
+											</label>
+										<% else %>
+										    <label class="radio-inline">
+											  <%= f.radio_button :sex, :男 %>
+											  <%= f.label :男 %>
+											</label>
+											<label class="radio-inline">
+											  <%= f.radio_button :sex, :女, checked: "checked" %>
+											  <%= f.label :女 %>
+											</label>
+										<% end %>
+									</td>
+								</tr>
+								<tr>
+									<th colspan="2">受講者の年齢 ※</th>
+									<td>
+										<% if session[:customer_all] == nil %>
+											<div class="form-group contact-form-age">
+												<%= f.collection_select :age_id, Age.all, :id, :age_name, :prompt => '年齢・学年を選択' %>
+											</div>
+										<% else %>
+											<div class="form-group contact-form-age">
+												<%= f.collection_select :age_id, Age.all, :id, :age_name, :selected => session[:customer_all]["age_id"] %>
+												<%= error_messages!(@customer,:age_id,"受講者の年齢") %>
+											</div>
+									    <% end %>
+									</td>
+								</tr>
+								<tr>
+									<th colspan="2">受講希望コース ※</th>
+									<td>
+										<div class="radio">
+										  	<% if session[:customer_all] == nil %>
+										  	    <%= f.collection_radio_buttons(:course_id, Course.all, :id, :course, {:checked => 1}) do |b| %>
+												  	<div>
+											    	<%= b.label { b.radio_button + b.text}  %>
+									    	    <% end %>
+									    	<% else %>
+										  	    <%= f.collection_radio_buttons(:course_id, Course.all, :id, :course, {:checked => session[:customer_all]["course_id"]}) do |b| %>
+											  		<div>
+											  		<%= b.label { b.radio_button + b.text}  %>
+									    	    <% end %>
+									    	<% end %>
+									        </div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th colspan="2">タブレット・ノートPCの所有 ※</th>
+									<td>
+										<% if session[:customer_all] == nil %>
+												<label class="radio-inline">
+												  <%= f.radio_button :pc, :タブレット, checked: "checked" %>
+												  <%= f.label :タブレット %>
+												</label>
+												<label class="radio-inline">
+												  <%= f.radio_button :pc, :ノートPC %>
+												  <%= f.label :ノートPC %>
+												</label>
+												<label class="radio-inline">
+												  <%= f.radio_button :pc, :両方持っている %>
+												  <%= f.label :両方持っている %>
+												</label>
+												<label class="radio-inline">
+												  <%= f.radio_button :pc, :どちらも持っていない %>
+												  <%= f.label :どちらも持っていない %>
+												</label>
+										<% elsif session[:customer_all]["pc"] == "タブレット" %>
+										        <label class="radio-inline">
+												  <%= f.radio_button :pc, :タブレット, checked: "checked" %>
+												  <%= f.label :タブレット %>
+												</label>
+												<label class="radio-inline">
+												  <%= f.radio_button :pc, :ノートPC %>
+												  <%= f.label :ノートPC %>
+												</label>
+												<label class="radio-inline">
+												  <%= f.radio_button :pc, :両方持っている %>
+												  <%= f.label :両方持っている %>
+												</label>
+												<label class="radio-inline">
+												  <%= f.radio_button :pc, :どちらも持っていない %>
+												  <%= f.label :どちらも持っていない %>
+												</label>
+										<% elsif session[:customer_all]["pc"] == "ノートPC" %>
+										        <label class="radio-inline">
+												  <%= f.radio_button :pc, :タブレット %>
+												  <%= f.label :タブレット %>
+												</label>
+												<label class="radio-inline">
+												  <%= f.radio_button :pc, :ノートPC, checked: "checked" %>
+												  <%= f.label :ノートPC %>
+												</label>
+												<label class="radio-inline">
+												  <%= f.radio_button :pc, :両方持っている %>
+												  <%= f.label :両方持っている %>
+												</label>
+												<label class="radio-inline">
+												  <%= f.radio_button :pc, :どちらも持っていない %>
+												  <%= f.label :どちらも持っていない %>
+												</label>
+										<% elsif session[:customer_all]["pc"] == "両方持っている" %>
+										        <label class="radio-inline">
+												  <%= f.radio_button :pc, :タブレット %>
+												  <%= f.label :タブレット %>
+												</label>
+												<label class="radio-inline">
+												  <%= f.radio_button :pc, :ノートPC %>
+												  <%= f.label :ノートPC %>
+												</label>
+												<label class="radio-inline">
+												  <%= f.radio_button :pc, :両方持っている, checked: "checked" %>
+												  <%= f.label :両方持っている %>
+												</label>
+												<label class="radio-inline">
+												  <%= f.radio_button :pc, :どちらも持っていない %>
+												  <%= f.label :どちらも持っていない %>
+												</label>
+										<% else %>
+										        <label class="radio-inline">
+												  <%= f.radio_button :pc, :タブレット %>
+												  <%= f.label :タブレット %>
+												</label>
+												<label class="radio-inline">
+												  <%= f.radio_button :pc, :ノートPC %>
+												  <%= f.label :ノートPC %>
+												</label>
+												<label class="radio-inline">
+												  <%= f.radio_button :pc, :両方持っている %>
+												  <%= f.label :両方持っている %>
+												</label>
+												<label class="radio-inline">
+												  <%= f.radio_button :pc, :どちらも持っていない, checked: "checked" %>
+												  <%= f.label :どちらも持っていない %>
+												</label>
+										<% end %>
+									</td>
+								</tr>
+								<tr>
+									<th colspan="2">電話番号 ※</th>
+									<div class="form-group">
+									   <td>
+									   	   <div class="row">
+									   	   	    <div class="col-md-4">
+									   	   	    	<% if session[:customer_all] == nil %>
+									   	                 <%= f.text_field :phone, autofocus: false, id:"phone", :class => "form-control" , :placeholder => "半角数字・ハイフンなし" %>
+									   	            <% else %>
+									   	                 <%= f.text_field :phone, autofocus: false, id:"phone", :class => "form-control" , :placeholder => "半角数字・ハイフンなし", :value => "#{session[:customer_all]["phone"]}" %>
+									   	                 <%= error_messages!(@customer,:phone,"電話番号") %>
+									   	            <% end %>
+									   	        </div>
+									   	        <div class="col-md-3 contact-form-phone">
+									   	            例)000000000
+									   	        </div>
+									   	   </div>
+									   </td>
+									</div>
+								</tr>
+								<tr>
+									<th colspan="2">メールアドレス ※</th>
+									<div class="form-group">
+										<td>
+											<div class="row">
+										   	   	    <div class="col-md-4">
+										   	   	    	<% if session[:customer_all] == nil %>
+										   	                 <%= f.email_field :email, id:"email", :class => "form-control" , :placeholder => "半角英数" %>
+										   	            <% else %>
+										   	                 <%= f.email_field :email, id:"email", :class => "form-control" , :placeholder => "半角英数", :value => "#{session[:customer_all]["email"]}" %>
+										   	                 <%= error_messages!(@customer,:email,"メールアドレス") %>
+										   	            <% end %>
+										   	        </div>
+										   	        <div class="col-md-3 contact-form-phone">
+										   	            例)mama@abc.co.jp
+										   	        </div>
+										   	</div>
+										</td>
+									</div>
+								</tr>
+								<tr>
+									<th colspan="2">ご希望の連絡方法 ※</th>
+									<td>
+										<% if session[:customer_all] == nil %>
+												<label class="radio-inline">
+												  <%= f.radio_button :contact, :電話, checked: "checked" %>
+												  <%= f.label :電話 %>
+												</label>
+												<label class="radio-inline">
+												  <%= f.radio_button :contact, :メール %>
+												  <%= f.label :メール %>
+												</label>
+												<label class="radio-inline">
+												  <%= f.radio_button :contact, :どちらでもよい %>
+												  <%= f.label :どちらでもよい %>
+												</label>
+										<% elsif session[:customer_all]["contact"] == "電話" %>
+										        <label class="radio-inline">
+												  <%= f.radio_button :contact, :電話, checked: "checked" %>
+												  <%= f.label :電話 %>
+												</label>
+												<label class="radio-inline">
+												  <%= f.radio_button :contact, :メール %>
+												  <%= f.label :メール %>
+												</label>
+												<label class="radio-inline">
+												  <%= f.radio_button :contact, :どちらでもよい %>
+												  <%= f.label :どちらでもよい %>
+												</label>
+										<% elsif session[:customer_all]["contact"] == "メール" %>
+										        <label class="radio-inline">
+												  <%= f.radio_button :contact, :電話 %>
+												  <%= f.label :電話 %>
+												</label>
+												<label class="radio-inline">
+												  <%= f.radio_button :contact, :メール, checked: "checked" %>
+												  <%= f.label :メール %>
+												</label>
+												<label class="radio-inline">
+												  <%= f.radio_button :contact, :どちらでもよい %>
+												  <%= f.label :どちらでもよい %>
+												</label>
+										<% else %>
+										        <label class="radio-inline">
+												  <%= f.radio_button :contact, :電話 %>
+												  <%= f.label :電話 %>
+												</label>
+												<label class="radio-inline">
+												  <%= f.radio_button :contact, :メール %>
+												  <%= f.label :メール %>
+												</label>
+												<label class="radio-inline">
+												  <%= f.radio_button :contact, :どちらでもよい, checked: "checked" %>
+												  <%= f.label :どちらでもよい %>
+												</label>
+										<% end %>
+									</td>
+								</tr>
+								<tr>
+									<th rowspan="4">住所</th>
+									<th class="col2">郵便番号 ※</th>
+									<div class="form-group">
+										<td>
+											<div class="form-inline">
+												<% if session[:customer_all] == nil %>
+													 <%= f.text_field :post_code, id:"post_code", name:"customer[post_code]", :class => "form-control postcode-form" , maxlength:"7", :placeholder => "1234567" %>
+												<% else %>
+												     <%= f.text_field :post_code, id:"post_code", name:"customer[post_code]", :class => "form-control postcode-form" , maxlength:"7", :placeholder => "1234567", :value => "#{session[:customer_all]["post_code"]}"  %>
+												<% end %>
+												<input type="button" id="btn_post_code" class="btn btn-info btn-sm" value="住所の自動入力" onClick="AjaxZip3.zip2addr('customer[post_code]','','customer[region_key]','customer[city]');">
+											    <%= error_messages!(@customer,:post_code,"郵便番号") %>
+										    </div>
+										</td>
+									</div>
+									</tr>
+								<tr>
+									<th class="col2">都道府県 ※</th>
+							            <div class="form-group">
+									       <td>
+									       	   <div class="row">
+									       	   	   <div class="col-md-3">
+									       	   	   	<% if session[:customer_all] == nil %>
+									       	   	   	     <%= f.text_field :region_key, id:"region", :class => "form-control" , :placeholder => "都道府県" ,name: "customer[region_key]" %>
+									       	   	   	<% else %>
+									       	   	        <%= f.text_field :region_key, id:"region", :class => "form-control" , :placeholder => "都道府県" ,name: "customer[region_key]", :value => "#{session[:customer_all]["region_key"]}" %>
+									       	   	        <%= error_messages!(@customer,:region,"都道府県") %>
+									       	   	   	<% end %>
+									       	       </div>
+									       	   </div>
+									       </td>
+							            </div>
+								</tr>
+								<tr>
+									<th class="col2">市区町村 ※</th>
+										<div class="form-group">
+										    <td>
+										    	<% if session[:customer_all] == nil %>
+									       	         <%= f.text_field :city, id:"city", name:"customer[city]", :class => "form-control contact-form-size" , :placeholder => "市区町村" %>
+									       	    <% else %>
+									       	         <%= f.text_field :city, id:"city", name:"customer[city]", :class => "form-control contact-form-size" , :placeholder => "市区町村", :value => "#{session[:customer_all]["city"]}" %>
+									       	         <%= error_messages!(@customer,:city,"市区町村") %>
+									       	    <% end %>
+										   	</td>
+										</div>
+								</tr>
+								<tr>
+									<th class="col2">番地<br>マンション名</th>
+										<div class="form-group">
+										   <td>
+										   	    <% if session[:customer_all] == nil %>
+										   	             <%= f.text_field :street, id: "street", :class => "form-control" , :placeholder => "町域以下住所" %>
+										   	    <% else %>
+										   	             <%= f.text_field :street, id: "street", :class => "form-control" , :placeholder => "町域以下住所", :value => "#{session[:customer_all]["street"]}" %>
+										   	    <% end %>
+										   </td>
+										</div>
+								</tr>
+								<tr>
+									<th colspan="2">保護者様のお名前 ※</th>
+										<div class="form-group">
+										    <td>
+												<div class="form-inline">
+												  <div class="row">
+												  	<% if session[:customer_all] == nil %>
+														<div class="col-md-3">
+														(漢字)
+															<%= f.text_field :parents_last_name, autofocus: false, id:"parents_last_name", :class => "form-control" , :placeholder => "姓" %>
+														</div>
+														<div class="col-md-3 contact-name">
+															<%= f.text_field :parents_first_name, autofocus: false, id:"parents_first_name", :class => "form-control" , :placeholder => "名" %>
+														</div>
+														<div class="col-md-3">
+														(フリガナ)
+														<%= f.text_field :parents_last_name_kana, autofocus: false, id:"parents_last_name_kana", :class => "form-control" , :placeholder => "セイ" %>
+														</div>
+														<div class="col-md-3 contact-name">
+															<%= f.text_field :parents_first_name_kana, autofocus: false, id:"parents_first_name_kana", :class => "form-control" , :placeholder => "メイ" %>
+														</div>
+												    <% else %>
+												        <div class="col-md-3">
+														(漢字)
+															<%= f.text_field :parents_last_name, autofocus: false, id:"parents_last_name", :class => "form-control" , :placeholder => "姓", :value => "#{session[:customer_all]["parents_last_name"]}" %>
+															<%= error_messages!(@customer,:parents_last_name,"苗字(漢字) ") %>
+														</div>
+														<div class="col-md-3 contact-name">
+															<%= f.text_field :parents_first_name, autofocus: false, id:"parents_first_name", :class => "form-control" , :placeholder => "名", :value => "#{session[:customer_all]["parents_first_name"]}" %>
+															<%= error_messages!(@customer,:parents_first_name,"名前(漢字)") %>
+														</div>
+														<div class="col-md-3">
+														(フリガナ)
+														<%= f.text_field :parents_last_name_kana, autofocus: false, id:"parents_last_name_kana", :class => "form-control" , :placeholder => "セイ", :value => "#{session[:customer_all]["parents_last_name_kana"]}" %>
+														<%= error_messages!(@customer,:parents_last_name_kana,"苗字(カナ)") %>
+														</div>
+														<div class="col-md-3 contact-name">
+															<%= f.text_field :parents_first_name_kana, autofocus: false, id:"parents_first_name_kana", :class => "form-control" , :placeholder => "メイ", :value => "#{session[:customer_all]["parents_first_name_kana"]}" %>
+															<%= error_messages!(@customer,:parents_first_name_kana,"名前(カナ)") %>
+														</div>
+												    <% end %>
+												  </div>
+												</div>
+										    </td>
+										</div>
+								</tr>
+								<tr>
+									<th colspan="2">備考</th>
+									   <td>
+									   	   <div class="form-group">
+									   	   	<% if session[:customer_all] == nil %>
+									   	   	     <%= f.text_area :remarks, id:"remarks", :class => "form-control text-area-pr", row: "5", :placeholder => "例 ) 無料体験を希望します。" %>
+									   	   	<% else %>
+									   	   	    <%= f.text_area :remarks, id:"remarks", :class => "form-control text-area-pr", row: "5", :placeholder => "例 ) 無料体験を希望します。", :value => "#{session[:customer_all]["remarks"]}"  %>
+									   	   	<% end %>
+									   	   </div>
+									   </td>
+									</div>
+								</tr>
+					</table>
+					<i>※がついてる箇所は必須項目です。</i>
+					<div class="col-md-offset-2 col-md-8">
+						<%= f.hidden_field :classwork_id, value: @classwork.id %>
+						<%= f.submit"入力内容を確認する", class:"btn btn-success btn-block btn-lg contact-form-button" %>
+					</div>
+				</section>
+			</div>
+	    <% end %>
+</div>
+<!-- </div> -->

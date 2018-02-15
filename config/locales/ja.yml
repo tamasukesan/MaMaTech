@@ -1,0 +1,74 @@
+ja:
+  activerecord:
+    models:
+      customer: カスタマー
+      user: ユーザー
+      classwork: 教室情報
+      class_course: コース
+    attributes:
+      customer:
+          customer_first_name: 受講者の名前(漢字)
+          customer_last_name: 受講者の苗字(漢字)
+          customer_first_name_kana: 受講者の名前(カナ)
+          customer_last_name_kana: 受講者の苗字(カナ)
+          sex: 性別
+          age_id: 年齢
+          course_id: 受講希望コース
+          post_code: 郵便番号
+          region_id: 都道府県
+          city: 市区町村
+          street: 番地マンション名
+          phone: 電話番号
+          email: メールアドレス
+          contact: ご希望の連絡方法
+          pc: タブレット・ノートPCの所有
+          parents_first_name: 保護者様の名前(漢字)
+          parents_last_name: 保護者様の苗字(漢字)
+          parents_first_name_kana: 保護者様の名前(カナ)
+          parents_last_name_kana: 保護者様の苗字(カナ)
+      user:
+        first_name: 名前(漢字)
+        last_name: 苗字(漢字)
+        first_name_kana: 名前(カナ)
+        last_name_kana: 苗字(カナ)
+        post_code: 郵便番号
+        region: 都道府県
+        city: 市区町村
+        street: 番地マンション名
+        phone: 電話番号
+      classwork:
+        classwork_post_code_first: 郵便番号(３桁)
+        classwork_post_code_last: 郵便番号(下４桁)
+        region_id: 都道府県
+        classwork_city: 市区町村
+        classwork_street: 番地マンション名
+        classwork_phone: 郵便番号
+        billing_phone: 電話番号
+        classwork_email: メールアドレス
+        classwork_pr: 教室PR
+        state: 公開状況
+        teacher_image_id: 講師の顔写真
+        career: 経歴
+      class_course:
+        course_id: 対応コース
+      errors:
+          messages:
+            invalid: "が不正な値です。"
+            confirmation: "が一致しません。"
+            accepted: "を承諾してください。"
+            empty: "が記入されていません。"
+            blank: "が記入されていません。"
+            inclusion: "は一覧にありません。"
+            exclusion: "は予約されています。"
+            too_long: "は%{count}文字以内で記入してください。"
+            too_short: "は%{count}文字以上で記入してください。"
+            wrong_length: "は%{count}文字で記入してください。"
+            taken: "はすでに使用されています。"
+            not_a_number: "は数値で入力してください。"
+            greater_than: "は%{count}より大きい値を指定してください。"
+            greater_than_or_equal_to: "は%{count}以上の値を指定してください。"
+            equal_to: "は%{count}を指定してください。"
+            less_than: "は%{count}より小さい値を指定してください。"
+            less_than_or_equal_to: "は%{count}以下の値を指定してください。"
+            required: "が記入されていません。"
+            record_invalid: "バリデーションエラーです。"
