@@ -106,32 +106,6 @@ class ClassworksController < ApplicationController
                                         )
   end
 
-  # def customer_params
-  #     params.require(:customer).permit(:classwork_id,
-  #                                      :customer_first_name,
-  #                                      :customer_last_name,
-  #                                      :customer_first_name_kana,
-  #                                      :customer_last_name_kana,
-  #                                      :sex,
-  #                                      :age_id,
-  #                                      :course_id,
-  #                                      :post_code,
-  #                                      :region_key,
-  #                                      :city,
-  #                                      :street,
-  #                                      :phone,
-  #                                      :email,
-  #                                      :contact,
-  #                                      :pc,
-  #                                      :parents_first_name,
-  #                                      :parents_last_name,
-  #                                      :parents_first_name_kana,
-  #                                      :parents_last_name_kana,
-  #                                      :remarks,
-  #                                      :correspondence,
-  #                                      :customer_status
-  #                                      )
-  # end
 end
 
 # hash = {key1 => value1, ley2 => value2}
