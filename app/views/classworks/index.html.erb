@@ -1,14 +1,22 @@
+<% breadcrumb :classworks %>
+
 	<div class="main-visual">
 		<div class="container">
+		<%= render partial: 'customers/breadcrumb' %>
 			<div class="row price">
 				<h1>　教室検索</h1>
 				<div class="col-xs-12">
 					<section>
 						<h3 class="school-area-title">
-							<% @regions.each do |r| %>
-								<%= r.region.region %>
+							<%# binding.pry %>
+							<% if @classworks.present? %>
+								<% @regions.each do |r| %>
+									<%= r.region.region %>
+								<% end %>では<%= @classworks.count %>件該当する教室がありました。
+							<% else %>
+							    該当する教室はありませんでした。条件を変更して再度検索してください。
 							<% end %>
-						　　(全<%= @classworks.count %>件)</h3>
+						</h3>
 
 							<table class="school-area-table">
 								<thead>
@@ -23,13 +31,14 @@
 								</tr>
 								</thead>
 								<tbody>
+									<%# binding.pry %>
 									<% @classworks.each do |classwork| %>
 										<tr>
 											<td><%= classwork.region.region %></td>
-											<td><%= classwork.classwork_city %><%= classwork.classwork_street %></td>
+											<td><%= classwork.classwork_city %></td>
 											<td><%= classwork.user.last_name %><%= classwork.user.first_name %></td>
 
-                                            <!-- courseテーブルにあるidがclassworkに紐づくClass_courseのcourse_idにあるか判断 -->
+                                            <!-- courseテーブルにあるidがclassworkに紐づくClass_courseのcourse_idにあるか判断するメソッドを実行している。classworkのヘルパーメソッドに記述してある。-->
 											<% @courses.each do |course| %>
 												<td><%= course_id_present?(course, classwork.class_courses) %></td>
 											<% end %>

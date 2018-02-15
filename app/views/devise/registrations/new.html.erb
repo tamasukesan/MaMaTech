@@ -1,33 +1,41 @@
+<% breadcrumb :sign_in %>
 
   <div class="main-visual">
     <div class="container">
+      <%= render partial: 'customers/breadcrumb' %>
       <div class="row price">
         <h2>　ユーザー登録</h2>
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-          <%= devise_error_messages! %>
           <div class="col-xs-12">
             <section>
+          <%#= devise_error_messages! %>
+          <%# Rails.logger.info(resource.errors.messages[:region]) %>
               <table class="contact-form">
-                <form>
                     <tr>
                       <th colspan="2">お名前 ※</th>
                       <td>
                         <div class="form-inline">
                           <div class="row">
-                          <div class="col-md-3">
-                            <span>(漢字)</span>
-                            <%= f.text_field :last_name, autofocus: true, id:"last_name", :class => "form-control" , :placeholder => "姓"%>
-                          </div>
-                          <div class="col-md-3 contact-name">
-                            <%= f.text_field :first_name, autofocus: true, id:"first_name", :class => "form-control" , :placeholder => "名"%>
-                          </div>
-                          <div class="col-md-3">
-                          <span>(フリガナ)</span>
-                            <%= f.text_field :last_name_kana, autofocus: true, id:"last_name_kana", :class => "form-control" , :placeholder => "セイ"%>
-                          </div>
-                          <div class="col-md-3 contact-name">
-                            <%= f.text_field :first_name_kana, autofocus: true, id:"first_name_kana", :class => "form-control" , :placeholder => "メイ"%>
-                          </div>
+                                <div class="col-md-3">
+                                  　<span>(漢字)</span>
+                                        <%= f.text_field :last_name, autofocus: true, id:"last_name", :class => "form-control" , :placeholder => "姓"%>
+                                        <%= error_messages!(resource,:last_name,"苗字(漢字) ") %>
+                                </div>
+                                <div class="col-md-3 contact-name">
+                                    <span></span>
+                                        <%= f.text_field :first_name, autofocus: true, id:"first_name", :class => "form-control" , :placeholder => "名"%>
+                                        <%= error_messages!(resource,:first_name,"名前(漢字)") %>
+                                </div>
+                                <div class="col-md-3">
+                                    <span>(フリガナ)</span>
+                                        <%= f.text_field :last_name_kana, autofocus: true, id:"last_name_kana", :class => "form-control" , :placeholder => "セイ"%>
+                                        <%= error_messages!(resource,:last_name_kana,"苗字(カナ)") %>
+                                </div>
+                                <div class="col-md-3 contact-name">
+                                    <span></span>
+                                        <%= f.text_field :first_name_kana, autofocus: true, id:"first_name_kana", :class => "form-control" , :placeholder => "メイ"%>
+                                        <%= error_messages!(resource,:first_name_kana,"名前(カナ)") %>
+                                </div>
                           </div>
                         </div>
                       </td>
@@ -39,6 +47,7 @@
                              <div class="row">
                                   <div class="col-md-4">
                                     <%= f.text_field :phone, autofocus: true, id:"phone", :class => "form-control" , :placeholder => "半角数字・ハイフンなし"%>
+                                    <%= error_messages!(resource,:phone,"電話番号") %>
                                   </div>
                                   <div class="col-md-3 contact-form-phone">
                                       例)000000000
@@ -54,6 +63,7 @@
                           <div class="row">
                                     <div class="col-md-4">
                                       <%= f.email_field :email, id:"email", :class => "form-control" , :placeholder => "半角英数"%>
+                                      <%= error_messages!(resource,:email,"メールアドレス") %>
                                     </div>
                                     <div class="col-md-3 contact-form-phone">
                                         例)mama@abc.co.jp
@@ -71,6 +81,7 @@
                           <div class="form-inline">
                             <%= f.text_field :post_code, id:"post_code", name:"user[post_code]", :class => "form-control postcode-form" , maxlength:"7", :placeholder => "1234567" %>
                             <input type="button" id="btn_post_code" class="btn btn-info btn-sm" value="住所の自動入力" onClick="AjaxZip3.zip2addr('user[post_code]','','user[region_key]','user[city]');">
+                            <%= error_messages!(resource,:post_code,"郵便番号") %>
                             </div>
                         </td>
                       </div>
@@ -82,6 +93,7 @@
                                  <div class="row">
                                      <div class="col-md-3">
                                       <%= f.text_field :region_key, id:"region", :class => "form-control" , :placeholder => "都道府県" ,name: "user[region_key]"%>
+                                      <%= error_messages!(resource,:region,"都道府県") %>
                                      </div>
                                  </div>
                              </td>
@@ -92,6 +104,7 @@
                         <div class="form-group">
                             <td>
                               <%= f.text_field :city, id:"city", name:"user[city]", :class => "form-control contact-form-size" , :placeholder => "市区町村"%>
+                              <%= error_messages!(resource,:city,"市区町村") %>
                             </td>
                         </div>
                     </tr>
@@ -110,6 +123,7 @@
                              <div class="row">
                                   <div class="col-md-6">
                                       <%= f.password_field :password, autocomplete: "off", class: "form-control", id:"inputPassword", placeholder:"半角英数字 6桁以上" %>
+                                      <%= error_messages!(resource,:password,"パスワード") %>
                                   </div>
                              </div>
                          </td>
@@ -122,12 +136,12 @@
                              <div class="row">
                                   <div class="col-md-6">
                                     <%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control", id:"inputConfirmPassword", placeholder:"パスワード再入力" %>
+                                    <%= error_messages!(resource,:password_confirmation,"パスワード再入力") %>
                                   </div>
                              </div>
                          </td>
                       </div>
                     </tr>
-                </form>
               </table>
               <i>※がついてる箇所は必須項目です。</i>
               <div class="col-md-offset-2 col-md-8">

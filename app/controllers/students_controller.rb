@@ -1,5 +1,6 @@
 class StudentsController < ApplicationController
   before_action :authenticate_user!
+  PER = 30
 
   def create
     @student = Student.new
@@ -13,10 +14,6 @@ class StudentsController < ApplicationController
     redirect_to students_path
   end
 
-  # def edit
-
-  # end
-
   def update
     @student = Student.find(params[:id])
     @student.update(student_params)
@@ -25,7 +22,7 @@ class StudentsController < ApplicationController
 
   def index
     @user = current_user
-    @students = @user.students.all
+    @students = @user.students.page(params[:page]).per(PER)
   end
 
   def show

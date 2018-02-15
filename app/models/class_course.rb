@@ -2,6 +2,7 @@ class ClassCourse < ApplicationRecord
   belongs_to :classwork
   belongs_to :course
 
+
 # 　ボツ１
   # def self.course_id_exist?(course)
   # 	self.all.each do |class_course|

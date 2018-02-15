@@ -6,7 +6,7 @@
 
     <%= stylesheet_link_tag    'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'  %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application' %>
   </head>
 
   <body>
@@ -29,7 +29,7 @@
 							<%= link_to '登録内容の編集', edit_classwork_path(current_user.classwork) %>
 						</li>
 					<% else %>
-						<li>
+					    <li>
 							<%= link_to '教室情報を登録', new_classwork_path %>
 						</li>
 					<% end %>
@@ -53,9 +53,14 @@
 							  <%= image_tag "DesignEvo-Transparent.png" ,class: "img-responsive" ,alt: "MaMatech" %>
 							<% end %>
 					</div>
-					<div class="col-md-offset-6 col-md-3">
+					<div class="col-md-offset-5 col-md-2">
                         <%= link_to applicants_path, class: 'btn btn-warning btn-md heder-button' do %>
-						  教室を希望の方は<br>こちらから
+						  教室開講を希望の方は<br>こちらから
+						<% end %>
+					</div>
+					<div class="col-md-2">
+                        <%= link_to new_user_session_path, class: 'btn btn-warning btn-md heder-button' do %>
+						   教室開講済みの方は <br>こちらから
 						<% end %>
 					</div>
 				</div>
@@ -107,11 +112,8 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-3">
-                        <%= link_to new_user_session_path, class: 'btn btn-warning btn-md heder-button' do %>
-						  講師の方はこちらから<br>ログイン
-						<% end %>
 					</div>
-					<div class="col-md-offset-2 col-md-4 contact_address">
+					<div class="col-md-offset-5 col-md-4 contact_address">
 						<h4>お問い合わせ</h4>
 						<p class="footer-text">
 							<%= image_tag "黒電話の無料アイコン.png" ,class: "denwa-icon", alt: "電話アイコン" %>  03-0000-0000
@@ -128,7 +130,10 @@
 				</div>
 			</div>
 		<% end %>
+		<address>Copyright(C)2018 MaMaTech,Allright Reserved.</address>
 	</footer>
 <%= javascript_include_tag 'https://ajaxzip3.github.io/ajaxzip3.js' %>
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+<!-- <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script> -->
   </body>
 </html>

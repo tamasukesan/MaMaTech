@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180121111518) do
+ActiveRecord::Schema.define(version: 20180128091431) do
+
+  create_table "ages", force: :cascade do |t|
+    t.string "age_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "class_courses", force: :cascade do |t|
     t.integer "classwork_id"
@@ -41,6 +47,8 @@ ActiveRecord::Schema.define(version: 20180121111518) do
     t.boolean "state", default: true, null: false
     t.string "teacher_image_id"
     t.text "career"
+    t.float "latitude"
+    t.float "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -62,7 +70,7 @@ ActiveRecord::Schema.define(version: 20180121111518) do
     t.string "customer_first_name_kana"
     t.string "customer_last_name_kana"
     t.integer "sex", limit: 1, default: 0, null: false
-    t.string "age"
+    t.integer "age_id"
     t.integer "course_id"
     t.string "post_code"
     t.integer "region_id"
@@ -70,7 +78,7 @@ ActiveRecord::Schema.define(version: 20180121111518) do
     t.string "street"
     t.string "phone"
     t.string "email"
-    t.integer "contact"
+    t.integer "contact", limit: 1, default: 0, null: false
     t.integer "pc", limit: 1, default: 0, null: false
     t.string "parents_first_name"
     t.string "parents_last_name"

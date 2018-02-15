@@ -11,12 +11,71 @@
 						<div class="col-md-7">
 							<section>
 								<h1>教室について</h1>
-								<p class="school-detail-text">説明だよ説明だよ説明だよ説明だよ説明だよ説明だよ説明だよ説明だよ説明だよ説明だよ説明だよ説明だよ説明だよ説明だよ説明だよ説明だよ説明だよ説明だよ説明だよ説明だよ説明だよ説明だよ説明だよ説明だよ説明だよ説明だよ説明だよ説明だよ説明だよ説明だよ説明だよ説明だよ</p>
+								<p class="school-detail-text">
+									MaMaTechは、自宅開講型子供向けプログラミングスクールです。<br>
+									2020年から小学校でもプログラミング教育が必修化されるなど、プログラミングはこれからの時代において必須スキルとなるという声が高まっています。MaMaTechでは気軽に楽しみながらプログラミングの知識・技術を身につけることができます。<br>
+									パソコンを触ったことがないお子様でも問題ありません。パソコンやプログラミングが初めての子どもが無理なく学べるカリキュラムを用意していますのでご安心下さい。<br>
+									子どもが興味を持ちやすい、ロボット・アプリ・ゲームCGなどをテーマにすることで、子どもの知的好奇心を刺激し、学ぶ喜びを体感してもらいます。また最先端の科学技術やIT技術に触れることで、理数系に興味をもち、理数系科目が得意な子どもを育てます。<br>
+									無料体験も実施しておりますので、お気軽にお問い合わせください。
+								</p>
 							</section>
 						</div>
-						<div class="col-md-5">
-							<%= image_tag "maekodomo.jpg" ,class: "img-responsive school-detail-image" ,alt: "#" %>
-							<%= image_tag "usirokodomo.jpg" ,class: "img-responsive school-detail-image" ,alt: "#" %>
+						<div class="col-md-5 slider">
+							<div class="box24">
+							　<p>授業風景</p>
+						    </div>
+							<div id="sampleCarousel" class="carousel slide" data-ride="carousel" data-interval="2500">
+								<ol class="carousel-indicators">
+									<li class="active" data-target="#schoolCarousel" data-slide-to="0"></li>
+									<li data-target="#schoolCarousel" data-slide-to="1"></li>
+									<li data-target="#schoolCarousel" data-slide-to="2"></li>
+								</ol>
+								<div class="carousel-inner">
+									<div class="item active">
+										<%= image_tag "maekodomo.jpg", alt:"First slide" %>
+									</div>
+									<div class="item">
+										<%= image_tag "usirokodomo.jpg", alt:"Second slide" %>
+									</div>
+									<div class="item">
+										<%= image_tag "sennseitokodomo.jpg", alt:"Third slide" %>
+									</div>
+								</div>
+								<a class="left carousel-control" href="#schoolCarousel" data-slide="prev">
+									<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+									<span class="sr-only">前へ</span>
+								</a>
+								<a class="right carousel-control" href="#schoolCarousel" data-slide="next">
+									<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+									<span class="sr-only">次へ</span>
+								</a>
+							</div>
+							<div id="sampleCarousel" class="carousel slide slider2" data-ride="carousel" data-interval="2500">
+								<ol class="carousel-indicators">
+									<li class="active" data-target="#school2Carousel" data-slide-to="0"></li>
+									<li data-target="#school2Carousel" data-slide-to="1"></li>
+									<li data-target="#school2Carousel" data-slide-to="2"></li>
+								</ol>
+								<div class="carousel-inner">
+									<div class="item active">
+										<%= image_tag "child-girl-young-caucasian-159848.jpg", alt:"First slide" %>
+									</div>
+									<div class="item">
+										<%= image_tag "pexels-photo-306534.jpg", alt:"Second slide" %>
+									</div>
+									<div class="item">
+										<%= image_tag "pexels-photo-207653.jpg", alt:"Third slide" %>
+									</div>
+								</div>
+								<a class="left carousel-control" href="#school2Carousel" data-slide="prev">
+									<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+									<span class="sr-only">前へ</span>
+								</a>
+								<a class="right carousel-control" href="#school2Carousel" data-slide="next">
+									<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+									<span class="sr-only">次へ</span>
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>

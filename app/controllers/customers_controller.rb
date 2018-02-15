@@ -17,16 +17,19 @@ class CustomersController < ApplicationController
   def search
   end
 
-  def new
-
-  end
-
   def create
-
-  end
-
-  def edit
-
+    @customer = Customer.new(customer_params)
+    @classwork = Classwork.find(@customer.classwork_id)
+    if params[:back]
+      render "classworks/show", {classwork: @classwork}
+    elsif @customer.save
+      NotificationMailer.send_when_create(@customer,@classwork).deliver_later
+      # セッションをからにする
+      session[:customer_all] = nil
+      redirect_to complete_path
+    else
+      render "classworks/show", {classwork: @classwork}
+    end
   end
 
   def update
@@ -42,8 +45,11 @@ class CustomersController < ApplicationController
     end
   end
 
-  def show
-
+  def confirm
+    @customer = Customer.new(customer_params) # <=POSTされたパラメータを取得
+    @classwork = Classwork.find(@customer.classwork_id)
+    session[:customer_all] = customer_params
+    render "classworks/show", {classwork: @classwork} if @customer.invalid? # <=バリデーションチェックNGなら戻す
   end
 
   private
@@ -54,10 +60,10 @@ class CustomersController < ApplicationController
                                        :customer_first_name_kana,
                                        :customer_last_name_kana,
                                        :sex,
-                                       :age,
+                                       :age_id,
                                        :course_id,
                                        :post_code,
-                                       :region_id,
+                                       :region_key,
                                        :city,
                                        :street,
                                        :phone,

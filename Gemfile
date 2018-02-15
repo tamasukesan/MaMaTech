@@ -48,6 +48,8 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'pry-rails'
+  gem 'letter_opener'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -56,20 +58,24 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'bootstrap-sass'
 gem 'jquery-rails'
+gem 'jquery-easing-rails', '~> 0.0.2'
+# gem 'jquery-ui-rails'
 gem 'jquery-turbolinks'
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
-gem 'kaminari'
+gem 'kaminari', '~> 0.17.0'
+gem 'kaminari-bootstrap', '~> 3.0.1'
 gem "font-awesome-rails"
 gem 'rspec-rails'
 gem 'hirb'
 gem 'hirb-unicode'
-gem 'pry-rails'
 gem 'nested_form_fields'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
 gem 'jquery-datatables-rails'
 gem 'gretel'
+gem 'geocoder'
+gem 'dotenv-rails'
 
 
 

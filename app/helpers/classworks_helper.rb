@@ -1,18 +1,7 @@
 module ClassworksHelper
-	def format_phone(str)
-    return str if str.blank?
-
-    case str.size
-    when 10
-      str.gsub(/(\d{2})(\d{4})(\d{4})/, '\1-\2-\3')
-    when 11
-      str.gsub(/(\d{3})(\d{4})(\d{4})/, '\1-\2-\3')
-    else
-      str
-    end
-  end
 
 # 　courseテーブルにあるidがclassworkに紐づくClass_courseのcourse_idにあるか判断するメソッド
+# 　もしcourseが持つidとclass_courseがもつcourse_idが一致すれば○。しなければ空欄。
   def course_id_present?(course, class_courses)
 	  	if class_courses.where(course_id: course.id).present?
 	  		return "○"
@@ -20,4 +9,10 @@ module ClassworksHelper
 	  		return ""
 	  	end
 	end
+
+# # セッションの中身を取り出す時のメソッド
+#   def customer(col)
+#     session["customer_all"]["#{col}"]
+#   end
+
 end

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta content="text/html; charset=UTF-8" />
+</head>
+<body>
+  <h2><%= @customer.parents_last_name %> 様</h2>
+  <hr />
+  <p>
+    <h4>お問い合わせいただきありがとうございます。</h4>
+  	<h4>＜お問い合わせ内容＞</h4>
+  	教室名:<%= @classwork.classwork_city %>教室<br>
+  	※教室の詳細情報はこちらから<br>
+  	<%= @url %><br>
+  	<br>
+  	受講生のお名前:<%= @customer.customer_last_name %><%= @customer.customer_first_name %><br>
+  	受講者の性別:<%= @customer.sex %><br>
+  	受講者の年齢:<%= @customer.age.age_name %><br>
+  	受講希望コース:<%= @customer.course.course %><br>
+  	電話番号:<%= @customer.phone %><br>
+  	メールアドレス:<%= @customer.email %><br>
+  	ご希望の連絡方法:<%= @customer.contact %><br>
+  	住所:<%= @customer.region.region %><%= @customer.city %><%= @customer.street %><br>
+  	保護者様のお名前:<%= @customer.parents_last_name %><%= @customer.parents_first_name %><br>
+  	備考:<%= @customer.remarks %><br>
+  	<br>
+  	担当者からご希望の連絡方法でご連絡いたします。
+  	何卒宜しくお願い致します。
+  </p>
+  <hr />
+</body>
+</html>

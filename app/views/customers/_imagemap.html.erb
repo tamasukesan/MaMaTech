@@ -1,0 +1,151 @@
+<div class="col-xs-9 search-panel">
+    <div class="panel panel-default">
+	    <div class="panel-heading search-panel-text">地図から都道府県別に探す</div>
+		  	<div class="panel-body search-image">
+		  		<%= image_tag "nihonchizu.jpg" ,usemap:"#ImageMap", alt: "日本地図" %>
+					<map name="ImageMap">
+							<%= link_to classworks_path(:search_region => "北海道") do %>
+							      <area shape="rect" coords="735,308,807,344" alt="北海道" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "青森県") do %>
+							  	  <area shape="rect" coords="734,419,807,456" alt="青森" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "岩手県") do %>
+								  <area shape="rect" coords="735,456,807,492" alt="岩手" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "宮城県") do %>
+								  <area shape="rect" coords="735,493,806,528" alt="宮城" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "秋田県") do %>
+								  <area shape="rect" coords="735,530,806,566" alt="秋田" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "山形県") do %>
+								  <area shape="rect" coords="735,567,808,603" alt="山形" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "福島県") do %>
+								  <area shape="rect" coords="735,604,808,640" alt="福島" />
+							<% end %>
+						    <%= link_to classworks_path(:search_region => "東京都") do %>
+								  <area shape="rect" coords="650,309,722,343" alt="東京" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "神奈川県") do %>
+								  <area shape="rect" coords="650,344,721,381" alt="神奈川" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "埼玉県") do %>
+								  <area shape="rect" coords="649,380,723,420" alt="埼玉" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "千葉県") do %>
+								  <area shape="rect" coords="650,419,721,454" alt="千葉" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "茨城県") do %>
+								  <area shape="rect" coords="650,456,723,493" alt="茨城" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "栃木県") do %>
+								  <area shape="rect" coords="650,493,721,528" alt="栃木" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "群馬県") do %>
+								  <area shape="rect" coords="650,530,723,566" alt="群馬" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "新潟県") do %>
+								  <area shape="rect" coords="566,419,638,456" alt="新潟" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "富山県") do %>
+								  <area shape="rect" coords="566,456,638,492" alt="富山" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "石川県") do %>
+								  <area shape="rect" coords="566,493,639,530" alt="石川" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "福井県") do %>
+								  <area shape="rect" coords="566,530,639,567" alt="福井" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "山梨県") do %>
+								  <area shape="rect" coords="491,419,566,455" alt="山梨" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "長野県") do %>
+								  <area shape="rect" coords="492,455,565,493" alt="長野" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "岐阜県") do %>
+								  <area shape="rect" coords="491,494,565,529" alt="岐阜" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "静岡県") do %>
+								  <area shape="rect" coords="492,531,564,565" alt="静岡" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "愛知県") do %>
+								  <area shape="rect" coords="491,567,565,602" alt="愛知" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "滋賀県") do %>
+								  <area shape="rect" coords="269,71,340,105" alt="滋賀" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "奈良県") do %>
+								  <area shape="rect" coords="269,108,341,143" alt="奈良" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "和歌山県") do %>
+								  <area shape="rect" coords="269,144,341,180" alt="和歌山" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "三重県") do %>
+								  <area shape="rect" coords="268,182,342,218" alt="三重" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "大阪府") do %>
+								  <area shape="rect" coords="194,71,267,105" alt="大阪" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "兵庫県") do %>
+								  <area shape="rect" coords="192,108,269,143" alt="兵庫" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "京都府") do %>
+								  <area shape="rect" coords="195,145,267,179" alt="京都" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "鳥取県") do %>
+								  <area shape="rect" coords="107,71,180,107" alt="鳥取" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "島根県") do %>
+								  <area shape="rect" coords="108,108,180,143" alt="島根" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "岡山県") do %>
+								  <area shape="rect" coords="108,145,181,180" alt="岡山" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "広島県") do %>
+								  <area shape="rect" coords="107,182,181,219" alt="広島" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "山口県") do %>
+								  <area shape="rect" coords="108,219,180,254" alt="山口" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "香川県") do %>
+								  <area shape="rect" coords="108,302,181,339" alt="香川" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "徳島県") do %>
+								  <area shape="rect" coords="108,339,180,375" alt="徳島" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "愛媛県") do %>
+								  <area shape="rect" coords="108,376,179,412" alt="愛媛" />
+							<% end %>
+						    <%= link_to classworks_path(:search_region => "高知県") do %>
+								  <area shape="rect" coords="107,413,181,449" alt="高知" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "福岡県") do %>
+								  <area shape="rect" coords="20,72,93,105" alt="福岡" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "佐賀県") do %>
+								  <area shape="rect" coords="21,108,93,144" alt="佐賀" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "大分県") do %>
+								  <area shape="rect" coords="19,145,92,180" alt="大分" />
+						    <% end %>
+							<%= link_to classworks_path(:search_region => "長崎県") do %>
+								  <area shape="rect" coords="20,182,93,216" alt="長崎" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "熊本県") do %>
+								  <area shape="rect" coords="20,219,93,254" alt="熊本" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "宮崎県") do %>
+								  <area shape="rect" coords="19,255,92,290" alt="宮崎" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "鹿児島県") do %>
+								  <area shape="rect" coords="20,293,92,327" alt="鹿児島" />
+							<% end %>
+							<%= link_to classworks_path(:search_region => "沖縄県") do %>
+								  <area shape="rect" coords="19,376,91,410" alt="沖縄" />
+							<% end %>
+					</map>
+		  	</div>
+	</div>
+</div>
